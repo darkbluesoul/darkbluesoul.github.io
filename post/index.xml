@@ -6,7 +6,7 @@
 >K2pdfopt&lt;/a>重排，排版效果不错，就是静不下心来看。下午算是看了一点了，这本书强调手输代码查错改错，敲代码的时候就是各种符号打打觉得很麻烦，平时打字这些括弧啊斜杠啊用到很少。看了五分之一，新知识学到不多，大部分错误都是Python版本的问题，不过后面应该不懂的会多起来了。&lt;/p>
 &lt;p>其实这篇是为了测试下我改来改去有没有问题的，这台电脑原来也没&lt;code>git clone&lt;/code>过远程库，本地预览一直出错，记得以前是要把远程主题拉下来才能正常的，忘了怎么弄了，就这样直接&lt;code>git push&lt;/code>下看看行不行。&lt;/p>
 &lt;p>VSCode装了GitHub插件，方便还是方便的，就是push的时候太慢了，经常网络连接错误，好在最后还是传上去了。&lt;/p>
-&lt;p>2023.3.20:目前在看&lt;a class="link" href="https://www.bookstack.cn/read/LearnPython3TheHardWay/spilt.1.learn-py3.md" target="_blank" rel="noopener"
+&lt;p>2023.3.20：目前在看&lt;a class="link" href="https://www.bookstack.cn/read/LearnPython3TheHardWay/spilt.1.learn-py3.md" target="_blank" rel="noopener"
 >笨办法学Python3（Learn Python3 The Hard Way 中文版）&lt;/a>&lt;/p></description></item><item><title>适用于hugo-theme-stack的微博icon</title><link>https://www.darkbluesoul.cc/p/%E9%80%82%E7%94%A8%E4%BA%8Ehugo-theme-stack%E7%9A%84%E5%BE%AE%E5%8D%9Aicon/</link><pubDate>Mon, 09 May 2022 07:57:10 +0800</pubDate><guid>https://www.darkbluesoul.cc/p/%E9%80%82%E7%94%A8%E4%BA%8Ehugo-theme-stack%E7%9A%84%E5%BE%AE%E5%8D%9Aicon/</guid><description>&lt;img src="https://www.darkbluesoul.cc/p/%E9%80%82%E7%94%A8%E4%BA%8Ehugo-theme-stack%E7%9A%84%E5%BE%AE%E5%8D%9Aicon/brand-weibo.svg" alt="Featured image of post 适用于hugo-theme-stack的微博icon" />&lt;p>总觉得社交资料页没有微博好像少了点什么，网上的图标大多是填充的，修改了颜色放上去也觉得不好看。
 那就自己整个呗，找了&lt;a class="link" href="https://blog.csdn.net/weixin_42247720/article/details/120807255" target="_blank" rel="noopener"
 >qq、微信、微博的svg小图标&lt;/a>，修改了一下，算是满意了。&lt;/p>
