@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MySQL on Darkblue Soul</title><link>https://www.darkbluesoul.cc/tags/mysql/</link><description>Recent content in MySQL on Darkblue Soul</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><atom:link href="https://www.darkbluesoul.cc/tags/mysql/index.xml" rel="self" type="application/rss+xml"/><item><title>Alibaba Cloud Linux安装Drupal10.0.7</title><link>https://www.darkbluesoul.cc/p/alibaba-cloud-linux%E5%AE%89%E8%A3%85drupal10.0.7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.darkbluesoul.cc/p/alibaba-cloud-linux%E5%AE%89%E8%A3%85drupal10.0.7/</guid><description>&lt;img src="https://www.darkbluesoul.cc/p/alibaba-cloud-linux%E5%AE%89%E8%A3%85drupal10.0.7/drupal.png" alt="Featured image of post Alibaba Cloud Linux安装Drupal10.0.7" />&lt;p>想学下Drupal，按&lt;a class="link" href="https://help.aliyun.com/document_detail/460773.html?spm=a2c4g.440490.0.0.1d2e38d3r4E6ag" target="_blank" rel="noopener"
+>部署LAMP环境（Alibaba Cloud Linux 3）&lt;/a>部署环境，但是PHP7.4没法安装Drupal10，所以修改了一下。其实还是挺折腾的，弄了一周多的样子，各种采坑，装好以后也是各种报错。好在这次安装基本都做了笔记，稍微整理下，供参考。&lt;/p>
+&lt;h2 id="apache24">&lt;strong>Apache2.4&lt;/strong>&lt;/h2>
+&lt;p>&lt;a class="link" href="https://httpd.apache.org/docs/2.4/install.html" target="_blank" rel="noopener"
+>Compiling and Installing - Apache HTTP Server Version 2.4&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">yum install httpd
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="mysql80">&lt;strong>Mysql8.0&lt;/strong>&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">wget http://dev.mysql.com/get/mysql80-community-release-el7-7.noarch.rpm &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> yum -y install mysql80-community-release-el7-7.noarch.rpm &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> yum -y install mysql-community-server --nogpgcheck
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="php8118">&lt;strong>PHP8.1.18&lt;/strong>&lt;/h2>
+&lt;p>修改了下&lt;a class="link" href="https://help.aliyun.com/document_detail/460773.html?spm=a2c4g.440490.0.0.1d2e38d3r4E6ag" target="_blank" rel="noopener"
+>部署LAMP环境（Alibaba Cloud Linux 3）&lt;/a>里的安装PHP命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">rpm -ivh --nodeps https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">dnf update -y dnf libdnf
+sed -i &lt;span class="s1">&amp;#39;s/PLATFORM_ID=&amp;#34;platform:al8&amp;#34;/PLATFORM_ID=&amp;#34;platform:el8&amp;#34;/g&amp;#39;&lt;/span> /etc/os-release
+yum -y module install php:remi-8.1
+sed -i &lt;span class="s1">&amp;#39;s/PLATFORM_ID=&amp;#34;platform:el8&amp;#34;/PLATFORM_ID=&amp;#34;platform:al8&amp;#34;/g&amp;#39;&lt;/span> /etc/os-release
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="phpmyadmin521">&lt;strong>phpMyAdmin5.2.1&lt;/strong>&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">mkdir -p /var/www/html/phpmyadmin
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="nb">cd&lt;/span>
+wget --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-languages.zip
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">unzip phpMyAdmin-5.2.1-all-languages.zip
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">mv phpMyAdmin-5.2.1-all-languages/* /var/www/html/phpmyadmin
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>部署成功后，phpMyAdmin无法登录显示“缺少mysqli扩展”、修复后登录数据库，页面底部如果显示“配置文件现在需要一个短语密码”、“缺少mcrypt扩展”，解决方法如下：&lt;/p>
+&lt;h3 id="缺少_mysqli_http4798224204phpmyadminurlphpurlhttp3a2f2fphpnet2fmanual2fen2fbookmysqliphptoken28a688d3024376b9403d44c07f54df9f扩展">缺少 &lt;a class="link" href="http://47.98.224.204/phpmyadmin/url.php?url=http%3A%2F%2Fphp.net%2Fmanual%2Fen%2Fbook.mysqli.php&amp;amp;token=28a688d3024376b9403d44c07f54df9f" target="_blank" rel="noopener"
+>&lt;em>mysqli&lt;/em>&lt;/a> 扩展：&lt;/h3>
+&lt;p>安装mysqli（参考&lt;a class="link" href="https://www.cnblogs.com/caryfang/p/5439299.html" target="_blank" rel="noopener"
+>linux下php-mysql拓展安装&lt;/a>）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">yum install php-mysql
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="缺少mcrypt扩展">缺少mcrypt扩展：&lt;/h3>
+&lt;p>安装mcrypt（参考&lt;a class="link" href="https://www.osyunwei.com/archives/2053.html" target="_blank" rel="noopener"
+>phpMyAdmin“缺少 mcrypt 扩展。请检查 PHP 配置。”解决办法&lt;/a>）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">yum  install  php-mcrypt  libmcrypt  libmcrypt-devel
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="配置文件现在需要一个短语密码">配置文件现在需要一个短语密码：&lt;/h3>
+&lt;p>按百度经验&lt;a class="link" href="https://jingyan.baidu.com/article/adc815137733faf722bf7358.html" target="_blank" rel="noopener"
+>配置文件现在需要一个短语密码&lt;/a> 修改。&lt;/p>
+&lt;h2 id="drupal1007">&lt;strong>Drupal10.0.7&lt;/strong>&lt;/h2>
+&lt;p>修改了&lt;a class="link" href="https://help.aliyun.com/document_detail/162768.html?spm=a2c4g.162767.0.0.17f51a18NaWePM" target="_blank" rel="noopener"
+>手动搭建Drupal网站&lt;/a>这篇帮助里的一些命令，换了版本号。&lt;/p>
+&lt;p>下载Drupal：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="nb">cd&lt;/span>
+wget https://ftp.drupal.org/files/projects/drupal-10.0.7.zip
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>解压Drupal：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">yum install unzip -y
+unzip drupal-10.0.7.zip
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>将安装文件移动到Apache的网站根目录:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">mv drupal-10.0.7/* /var/www/html
+mv drupal-10.0.7/.htaccess /var/www/html
+mv drupal-10.0.7/.csslintrc drupal-10.0.7/.editorconfig drupal-10.0.7/.eslintignore drupal-10.0.7/.eslintrc.json drupal-10.0.7/.gitattributes /var/www/html
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>下载中文翻译包：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="nb">cd&lt;/span> /var/www/html
+wget -P sites/default/files/translations https://ftp.drupal.org/files/translations/all/drupal/drupal-10.0.7.zh-hans.po
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>后续步骤同&lt;a class="link" href="https://help.aliyun.com/document_detail/162768.html?spm=a2c4g.162767.0.0.17f51a18NaWePM" target="_blank" rel="noopener"
+>手动搭建Drupal网站&lt;/a>。&lt;/p>
+&lt;h3 id="安装过程中cleanurl未激活">安装过程中CleanURL未激活&lt;/h3>
+&lt;p>/etc/httpd/conf/httpd.conf，找到&amp;lt;Directory &amp;ldquo;/var/www/html&amp;rdquo;&amp;gt;，将其中的&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-apache" data-lang="apache">&lt;span class="nb">AllowOverride&lt;/span> &lt;span class="k">None&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>修改为&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-apache" data-lang="apache">&lt;span class="nb">AllowOverride&lt;/span> &lt;span class="k">All&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="php-gd库缺失">php-gd库缺失：&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">yum -y install php-gd
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="critical-security-announcementsthat-starts-with-failed-to-fetch-security-advisory-data">Critical security announcements that starts with &amp;ldquo;Failed to fetch security advisory data&amp;rdquo;&lt;/h3>
+&lt;p>参考&lt;a class="link" href="https://www.drupal.org/docs/updating-drupal/responding-to-critical-security-update-advisories#s-troubleshooting-the-advisory-feed" target="_blank" rel="noopener"
+>Responding to critical security update advisories | Updating Drupal | Drupal Wiki guide on Drupal.org&lt;/a>
+按&lt;a class="link" href="https://www.drupal.org/docs/system-requirements/php-openssl-requirements" target="_blank" rel="noopener"
+>PHP OpenSSL requirements | System requirements | Drupal Wiki guide on Drupal.org&lt;/a>
+修改了&lt;code>settings.php&lt;/code> file:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-php" data-lang="php">&lt;span class="nv">$settings&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;update_fetch_with_http_fallback&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">TRUE&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>
