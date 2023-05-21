@@ -81,8 +81,7 @@ wget --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyA
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>部署成功后，phpMyAdmin无法登录显示“缺少mysqli扩展”、修复后登录数据库，页面底部如果显示“配置文件现在需要一个短语密码”、“缺少mcrypt扩展”，解决方法如下：&lt;/p>
-&lt;h3 id="缺少_mysqli_http4798224204phpmyadminurlphpurlhttp3a2f2fphpnet2fmanual2fen2fbookmysqliphptoken28a688d3024376b9403d44c07f54df9f扩展">缺少 &lt;a class="link" href="http://47.98.224.204/phpmyadmin/url.php?url=http%3A%2F%2Fphp.net%2Fmanual%2Fen%2Fbook.mysqli.php&amp;amp;token=28a688d3024376b9403d44c07f54df9f" target="_blank" rel="noopener"
->&lt;em>mysqli&lt;/em>&lt;/a> 扩展：&lt;/h3>
+&lt;h3 id="缺少_mysqli_扩展">缺少_mysqli_扩展：&lt;/h3>
 &lt;p>安装mysqli（参考&lt;a class="link" href="https://www.cnblogs.com/caryfang/p/5439299.html" target="_blank" rel="noopener"
 >linux下php-mysql拓展安装&lt;/a>）：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
