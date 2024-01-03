@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jekyll on Darkblue Soul</title><link>darkbluesoul.github.io/categories/jekyll/</link><description>Recent content in Jekyll on Darkblue Soul</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 29 Dec 2021 09:42:20 +0800</lastBuildDate><atom:link href="darkbluesoul.github.io/categories/jekyll/index.xml" rel="self" type="application/rss+xml"/><item><title>Adam Blog 2.0主题修改</title><link>darkbluesoul.github.io/p/adam-blog-2.0%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/</link><pubDate>Wed, 29 Dec 2021 09:42:20 +0800</pubDate><guid>darkbluesoul.github.io/p/adam-blog-2.0%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/</guid><description>&lt;h2 id="删除mailchimp">删除mailchimp&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jekyll on Darkblue Soul</title><link>https://darkbluesoul.github.io/categories/jekyll/</link><description>Recent content in Jekyll on Darkblue Soul</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 29 Dec 2021 09:42:20 +0800</lastBuildDate><atom:link href="https://darkbluesoul.github.io/categories/jekyll/index.xml" rel="self" type="application/rss+xml"/><item><title>Adam Blog 2.0主题修改</title><link>https://darkbluesoul.github.io/p/adam-blog-2.0%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/</link><pubDate>Wed, 29 Dec 2021 09:42:20 +0800</pubDate><guid>https://darkbluesoul.github.io/p/adam-blog-2.0%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/</guid><description>&lt;h2 id="删除mailchimp">删除mailchimp&lt;/h2>
 &lt;p>mailchimp原来的账号想不起来了，暂时懒得弄，不知道用邮件订阅的多不多？
 _config.yml里面mailchimp注释掉好像也有显示的，有点忘了，不喜欢，就直接把newsletter.html整个注释掉了，就不显示了。&lt;/p>
 &lt;h2 id="修改disqus为来必力">修改Disqus为来必力&lt;/h2>
@@ -155,7 +155,7 @@ _config.yml里面mailchimp注释掉好像也有显示的，有点忘了，不喜
 &lt;/div>&lt;p>这样设置有点烦的地方就是每篇文章里都要在摘要后面加上&lt;code>&amp;lt;!--more--&amp;gt;&lt;/code>，多了自定义的快乐，少了自动的简便。不过没事，复制粘贴一下也不会很辛苦。其实这里我弄了好久，还以为自己代码弄错了，结果一个呢是config里面定义分割符的时候少了引号，还一个最坑的就是我一直在改_layouts/post.html，all post页面其实是archive.html。&lt;/p>
 &lt;p>唉，思维惯势不可取，还一点是要细心，其实目录结构里看一下就知道了，就是每次翻倒都是扫一眼就过，该。&lt;/p>
 &lt;p>PS:发布的时候一直出错，显示&amp;rsquo;if' tag was never closed，按&lt;a class="link" href="https://blog.csdn.net/zhangpeterx/article/details/103920538" target="_blank" rel="noopener"
->GitHub 博客&amp;ndash; Jekyll&amp;ndash;代码高亮，Liquid 转义字符&lt;/a>的方法加了raw终于解决了，还一个就是tag里我写了个size。。。两个问题我花了好几个小时才解决。&lt;/p></description></item><item><title>inkscape修改logo</title><link>darkbluesoul.github.io/p/inkscape%E4%BF%AE%E6%94%B9logo/</link><pubDate>Mon, 27 Dec 2021 19:32:10 +0800</pubDate><guid>darkbluesoul.github.io/p/inkscape%E4%BF%AE%E6%94%B9logo/</guid><description>&lt;p>建好博客第一件事情就是改logo，毕竟不好顶着别人的名字啊，一开始想着简单弄个好了。&lt;/p>
+>GitHub 博客&amp;ndash; Jekyll&amp;ndash;代码高亮，Liquid 转义字符&lt;/a>的方法加了raw终于解决了，还一个就是tag里我写了个size。。。两个问题我花了好几个小时才解决。&lt;/p></description></item><item><title>inkscape修改logo</title><link>https://darkbluesoul.github.io/p/inkscape%E4%BF%AE%E6%94%B9logo/</link><pubDate>Mon, 27 Dec 2021 19:32:10 +0800</pubDate><guid>https://darkbluesoul.github.io/p/inkscape%E4%BF%AE%E6%94%B9logo/</guid><description>&lt;p>建好博客第一件事情就是改logo，毕竟不好顶着别人的名字啊，一开始想着简单弄个好了。&lt;/p>
 &lt;p>SVG不知道用什么打开，搜了下是AI，再搜Linux替代AI的软件，就找到inkscape了。之前只用过PS，好在是中文的？想不起来是不是中文的了，就按着原logo.svg的尺寸新建了个，文本输入DARKBLUESOUL，改了个字体，保存替换了原来的文件。&lt;code>jekyll serve&lt;/code>，本地看看很满意，就push上去了。&lt;/p>
 &lt;p>&lt;img src="https://s2.loli.net/2021/12/28/RBtfcoFNXbVxQjJ.png"
 loading="lazy"
@@ -179,7 +179,7 @@ alt="MVM-logo-full.png"
 loading="lazy"
 alt="DARKBLUESOULlast.png"
 >&lt;/p>
-&lt;p>所以现在我又回到最早的版本了，现在是路径了，不会再丢字体了。也好的，兜来兜去，知道的又多了点，不是么？&lt;/p></description></item><item><title>jekyll之折腾</title><link>darkbluesoul.github.io/p/jekyll%E4%B9%8B%E6%8A%98%E8%85%BE/</link><pubDate>Fri, 17 Dec 2021 13:32:20 -0600</pubDate><guid>darkbluesoul.github.io/p/jekyll%E4%B9%8B%E6%8A%98%E8%85%BE/</guid><description>&lt;h2 id="jekyll对新手略难">jekyll对新手略难&lt;/h2>
+&lt;p>所以现在我又回到最早的版本了，现在是路径了，不会再丢字体了。也好的，兜来兜去，知道的又多了点，不是么？&lt;/p></description></item><item><title>jekyll之折腾</title><link>https://darkbluesoul.github.io/p/jekyll%E4%B9%8B%E6%8A%98%E8%85%BE/</link><pubDate>Fri, 17 Dec 2021 13:32:20 -0600</pubDate><guid>https://darkbluesoul.github.io/p/jekyll%E4%B9%8B%E6%8A%98%E8%85%BE/</guid><description>&lt;h2 id="jekyll对新手略难">jekyll对新手略难&lt;/h2>
 &lt;p>Linux Mint安装&lt;a class="link" href="http://jekyllcn.com/" target="_blank" rel="noopener"
 >jekyll&lt;/a>，有点忘了，装ruby就折腾了好久，各种出错，应该就是Linux命令不熟的原因，最后算是弄好了，git push都正常，就是觉得主题不好看，下个主题么，又是缺东少西的，就懒得弄了。后面无聊搜了下Linux发行版的排名，下了个排第一的MXLinux，重装系统，jekyll啥的就都没了。&lt;/p>
 &lt;h2 id="gridea简单模板少">Gridea简单，模板少&lt;/h2>
