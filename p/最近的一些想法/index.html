@@ -152,10 +152,9 @@ UnrealEngine
 </footer>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css integrity="sha256-J+iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js integrity="sha256-InsNdER1b2xUewP+pKCUJpkhiqwHgqiPXDlIk7GzBu4=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI=" crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{renderMathInElement(document.querySelector(`.article-content`),{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})</script>
 </article>
-<script src=//unpkg.com/@waline/client@v2/dist/waline.js></script>
-<link href=//unpkg.com/@waline/client@v2/dist/waline.css rel=stylesheet>
-<div id=waline class=waline-container></div>
-<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding);--waline-font-size:var(--article-font-size)}.waline-container .wl-count{color:var(--card-text-color-main)}</style><script>Waline.init({dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://unpkg.com/@waline/emojis@1.1.0/weibo"],lang:"zh-CN",locale:{admin:"Admin"},requiredMeta:["name","email","url"],serverURL:"waline.darkbluesoul.cc"})</script>
+<script src=https://utteranc.es/client.js repo=darkbluesoul/blog issue-term=pathname crossorigin=anonymous async></script>
+<style>.utterances{max-width:unset}</style>
+<script>let utterancesLoaded=!1;function setUtterancesTheme(b){let a=document.querySelector('.utterances iframe');a&&a.contentWindow.postMessage({type:'set-theme',theme:`github-${b}`},'https://utteranc.es')}addEventListener('message',a=>{if(a.origin!=='https://utteranc.es')return;utterancesLoaded=!0,setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener('onColorSchemeChange',a=>{if(!utterancesLoaded)return;setUtterancesTheme(a.detail)})</script>
 <footer class=site-footer>
 <section class=copyright>
 &copy;
