@@ -22,8 +22,7 @@
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;p>买的时候随便挑了个系统是CentOS7的，不大会用，为了用Docker安装Memos，直接reinstall了个Ubuntu 18.04 with Docker，这样就把装Docker这步省掉了，然后绑了个子域名&lt;a class="link" href="https://memos.darkbluesoul.cc" target="_blank" rel="noopener"
->memos.darkbluesoul.cc&lt;/a>到VPS。&lt;/p>
+&lt;p>买的时候随便挑了个系统是CentOS7的，不大会用，为了用Docker安装Memos，直接reinstall了个Ubuntu 18.04 with Docker，这样就把装Docker这步省掉了，然后绑了个子域名[memos.darkbluesoul.cc]到VPS。&lt;/p>
 &lt;h2 id="memos安装">Memos安装&lt;/h2>
 &lt;p>&lt;a class="link" href="https://www.usememos.com/docs/install/container-install" target="_blank" rel="noopener"
 >Memos文档Container Install - Memos&lt;/a>&lt;/p>
@@ -320,4 +319,4 @@ font-family: &amp;#39;Courier New&amp;#39;, Courier, monospace;
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="后记">后记&lt;/h2>
-&lt;p>2024.11.21 开始用Bluesky，好像还不错，Memos删了不用了。&lt;/p></description></item></channel></rss>
+&lt;p>2024.11.21 Memos已删除。&lt;/p></description></item></channel></rss>
