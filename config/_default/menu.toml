@@ -14,3 +14,11 @@ url = "https://github.com/darkbluesoul"
 
 [social.params]
 icon = "brand-github"
+
+[[social]]
+identifier = "weibo"
+name = "Weibo"
+url = "https://weibo.com/darkbluesoul"
+
+[social.params]
+icon = "brand-weibo"
