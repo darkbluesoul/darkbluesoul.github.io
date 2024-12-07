@@ -33,7 +33,7 @@ icon = "brand-bluesky"
 
 [[social]]
 identifier = "threads"
-name = "threads"
+name = "Threads"
 url = "https://threads.net/darkbluesoul"
 
 [social.params]
