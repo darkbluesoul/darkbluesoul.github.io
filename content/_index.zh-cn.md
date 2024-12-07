@@ -1,8 +1,8 @@
 ---
 menu:
     main:
-        name: Home
-        weight: 1
+        name: 主页
+        weight: -100
         params:
             icon: home
 ---
