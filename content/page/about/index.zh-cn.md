@@ -6,7 +6,7 @@ menu:
         params:
             icon: user
 ---
-# A messy programming learner.
+## A messy programming learner.
 Messy其实是杂乱的意思，因为东学一点西学一点，依样画葫芦，所以到现在也没好好学过一门编程语言。
 
 WordPress.com最后呢还是没用，2017年之后就没写东西了，之前写的也都是心情杂记，现在改成私人博客了。
@@ -14,7 +14,7 @@ WordPress.com最后呢还是没用，2017年之后就没写东西了，之前写
 2021年底才知道Jekyll，然后再开始折腾静态博客。darkbluesoul.cc之前在godaddy买的，后来觉得贵，就一直等，等到保护期都过了，再去NameSilo注册，这个域名应该是不会换了，嗯，我只敢说应该。
 
 ## About @darkbluesoul.wordpress.com
->2009.12.10
+>### 2009.12.10
 >---
 >从2003年开始建站,中间用过的域名有:darkbluema.com,schaos.com,yoyoguild.com,darkbluesoul.com
 >
@@ -26,11 +26,11 @@ WordPress.com最后呢还是没用，2017年之后就没写东西了，之前写
 >
 >其实我只需要一个空间可以放放一些自己觉得有用的东西,那么,希望wordpress.com能完成这一小小要求!
 >
->2010.2.26
+>### 2010.2.26
 >---
 >中间wordpress.com无法访问,注册域名darkbluesoul.info,空间用了000webhost,只是好象自己已经连维护网站都没什么热情了,刚好最近又能访问了,我就又回来了,那个域名反正买的便宜,等过个一年就扔了!唉,没常性的家伙…
 >
->2017.5.21
+>### 2017.5.21
 >---
 >而后WP.com又无法访问,买了个空间,重新起用域名darkbluesoul.info,可又总是觉得不踏实,不知道是为了什么.现在这里又能访问了,我就又回来了…
 >
