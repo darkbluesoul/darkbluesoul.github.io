@@ -15,7 +15,6 @@ WordPress.com最后呢还是没用，2017年之后就没写东西了，之前写
 
 ## About @darkbluesoul.wordpress.com
 >### 2009.12.10
->---
 >从2003年开始建站,中间用过的域名有:darkbluema.com,schaos.com,yoyoguild.com,darkbluesoul.com
 >
 >从最早的FRONTPAGE制作的简单HTML网站到动网DVBBS7.10SP1,整合OBLOG,建PJBLOG,建WORDPRESS,一路过来也学了一点点东西.
@@ -27,11 +26,9 @@ WordPress.com最后呢还是没用，2017年之后就没写东西了，之前写
 >其实我只需要一个空间可以放放一些自己觉得有用的东西,那么,希望wordpress.com能完成这一小小要求!
 >
 >### 2010.2.26
->---
 >中间wordpress.com无法访问,注册域名darkbluesoul.info,空间用了000webhost,只是好象自己已经连维护网站都没什么热情了,刚好最近又能访问了,我就又回来了,那个域名反正买的便宜,等过个一年就扔了!唉,没常性的家伙…
 >
 >### 2017.5.21
->---
 >而后WP.com又无法访问,买了个空间,重新起用域名darkbluesoul.info,可又总是觉得不踏实,不知道是为了什么.现在这里又能访问了,我就又回来了…
 >
 >然后又懒得写博客，空了一段时间，后来做flash的时候买了个VLOCEM.COM域名，主机用了衡天的，还行，~~现在这个站还活着，不定期关闭~~。同时又把darkbluesoul.com注册了，同一主机新建站点搭好博客，想着要搬家，想啊想啊，就又把刚建的博客给删了。
