@@ -14,11 +14,3 @@ url = "https://github.com/darkbluesoul"
 
 [social.params]
 icon = "brand-github"
-
-[[social]]
-identifier = "mastodon"
-name = "Mastodon"
-url = "https://mastodon.social/@darkbluesoul"
-
-[social.params]
-icon = "brand-mastodon"
