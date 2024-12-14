@@ -14,3 +14,35 @@ url = "https://github.com/darkbluesoul"
 
 [social.params]
 icon = "brand-github"
+
+[[social]]
+identifier = "bluesky"
+name = "Bluesky"
+url = "https://bsky.app/profile/darkbluesoul.cc"
+
+[social.params]
+icon = "brand-bluesky"
+
+[[social]]
+identifier = "mastodon"
+name = "Mastodon"
+url = "https://mastodon.social/@darkbluesoul"
+
+[social.params]
+icon = "brand-mastodon"
+
+[[social]]
+identifier = "x"
+name = "X"
+url = "https://x.com/darkbluesoul"
+
+[social.params]
+icon = "brand-x"
+
+[[social]]
+identifier = "threads"
+name = "Threads"
+url = "https://www.threads.net/@darkbluesoul"
+
+[social.params]
+icon = "brand-threads"
