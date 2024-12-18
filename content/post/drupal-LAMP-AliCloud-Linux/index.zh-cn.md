@@ -4,7 +4,7 @@ title = "Alibaba Cloud Linux安装Drupal10.0.7"
 date = "2023-04-20 09:57:10 +0800"
 description = "Alibaba Cloud Linux 3.2104 LTS 64位部署LAMP环境，安装Drupal10.0.7及一些问题的解决办法。"
 categories = [
-    "Drupal"
+    "Web"
 ]
 tags = [
     "Drupal", "PHP", "phpMyAdmin", "MySQL", "Apache"
