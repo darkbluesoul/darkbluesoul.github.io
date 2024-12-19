@@ -16,9 +16,9 @@ url = "https://github.com/darkbluesoul"
 icon = "brand-github"
 
 [[social]]
-identifier = "weibo"
-name = "Weibo"
-url = "https://weibo.com/darkbluesoul"
+identifier = "bluesky"
+name = "Bluesky"
+url = "https://bsky.app/profile/darkbluesoul.cc"
 
 [social.params]
-icon = "brand-weibo"
+icon = "brand-bluesky"
