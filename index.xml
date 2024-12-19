@@ -1,0 +1,1319 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Darkblue Soul</title><link>https://www.darkbluesoul.cc/</link><description>Recent content on Darkblue Soul</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 19 Nov 2024 15:08:59 +0800</lastBuildDate><atom:link href="https://www.darkbluesoul.cc/index.xml" rel="self" type="application/rss+xml"/><item><title>Memos+Caddy+Cloudflare自建微博</title><link>https://www.darkbluesoul.cc/p/memos-caddy-cloudflare%E8%87%AA%E5%BB%BA%E5%BE%AE%E5%8D%9A/</link><pubDate>Tue, 19 Nov 2024 15:08:59 +0800</pubDate><guid>https://www.darkbluesoul.cc/p/memos-caddy-cloudflare%E8%87%AA%E5%BB%BA%E5%BE%AE%E5%8D%9A/</guid><description>&lt;img src="https://www.darkbluesoul.cc/p/memos-caddy-cloudflare%E8%87%AA%E5%BB%BA%E5%BE%AE%E5%8D%9A/memos.png" alt="Featured image of post Memos+Caddy+Cloudflare自建微博" />&lt;p>微博每次发了过几天就忍不住又改成自己可见，不知道是在担心什么。前段时间看到有介绍Memos自建微博的，略心动。这两天网上逛逛看到了Racknerd双11特惠VPS好便宜，没忍住。。。干脆$21.72买了两年。刚才想去找下链接，好像已经下架了。&lt;/p>
+&lt;p>最低配置如下：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>RAM&lt;/td>
+&lt;td>1 GB RAM&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CPU Cores&lt;/td>
+&lt;td>1 CPU Core&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Operating System&lt;/td>
+&lt;td>CentOS 7 64 Bit&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>买的时候随便挑了个系统是CentOS7的，不大会用，为了用Docker安装Memos，直接reinstall了个Ubuntu 18.04 with Docker，这样就把装Docker这步省掉了，然后绑了个子域名[memos.darkbluesoul.cc]到VPS。&lt;/p>
+&lt;h2 id="memos安装">Memos安装
+&lt;/h2>&lt;p>&lt;a class="link" href="https://www.usememos.com/docs/install/container-install" target="_blank" rel="noopener"
+>Memos文档Container Install - Memos&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">docker&lt;/span> &lt;span class="n">run&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">d&lt;/span> \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">--&lt;/span>&lt;span class="n">init&lt;/span> \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">--&lt;/span>&lt;span class="n">name&lt;/span> &lt;span class="n">memos&lt;/span> \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">--&lt;/span>&lt;span class="n">publish&lt;/span> &lt;span class="mi">5230&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">5230&lt;/span> \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">--&lt;/span>&lt;span class="n">volume&lt;/span> &lt;span class="o">~/.&lt;/span>&lt;span class="n">memos&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">memos&lt;/span> \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">neosmemo&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">memos&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">stable&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>装完直接&lt;code>memos.darkbluesoul.cc:5230&lt;/code>就能访问了。&lt;/p>
+&lt;h2 id="caddy安装">caddy安装
+&lt;/h2>&lt;p>本来Memos+Caddy按&lt;a class="link" href="https://www.usememos.com/docs/install/https" target="_blank" rel="noopener"
+>Using HTTPS&lt;/a>用Docker compose安装是最方便的，但是我前面安装compose都弄不好，干脆不用了。后来是按
+&lt;a class="link" href="https://caddyserver.com/docs/install" target="_blank" rel="noopener"
+>Install — Caddy Documentation&lt;/a>安装的，下面代码我全部粘贴到XShell运行只运行了第一行，后来是一行一行粘进去运行的。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -1sLf &amp;#39;https://dl.cloudsmith.io/public/caddy/stable/gpg.key&amp;#39; | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -1sLf &amp;#39;https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt&amp;#39; | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install caddy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="caddy反向代理">Caddy反向代理
+&lt;/h2>&lt;p>修改/etc/caddy/Caddyfile，nano我用不习惯，还是用vi了。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vi /etc/caddy/Caddyfile
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>将Caddyfile中&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">:80 {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Set this path to your site&amp;#39;s directory.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> root * /usr/share/caddy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Enable the static file server.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> file_server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Another common task is to set up a reverse proxy:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # reverse_proxy localhost:8080
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Or serve a PHP site through php-fpm:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # php_fastcgi localhost:9000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>改为&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">memos.your-domain.com {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Set this path to your site&amp;#39;s directory.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # root * /usr/share/caddy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Enable the static file server.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> file_server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Another common task is to set up a reverse proxy:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> reverse_proxy localhost:5230
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Or serve a PHP site through php-fpm:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # php_fastcgi localhost:9000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>就用了caddy自带的TLS和反向代理到memos：5230端口&lt;/p>
+&lt;p>修改后&lt;code>:wq&lt;/code>保存退出。&lt;/p>
+&lt;p>重启Caddy使配置生效：&lt;code>systemctl reload caddy&lt;/code>&lt;/p>
+&lt;p>然后就可以直接通过&lt;code>memos.darkbluesoul.cc&lt;/code>访问Memos了。&lt;/p>
+&lt;h2 id="cloudflare-r2-图床">Cloudflare R2 图床
+&lt;/h2>&lt;p>Cloudflare的配置按&lt;a class="link" href="https://hahagood.com/post/2024/03/20240306212529-setup_cloudflare_r2_bucket_for_memos/" target="_blank" rel="noopener"
+>配置 Cloudflare R2 存储 - Memos&lt;/a>，还有&lt;a class="link" href="https://www.pseudoyu.com/zh/2024/06/30/free_image_hosting_system_using_r2_webp_cloud_and_picgo/" target="_blank" rel="noopener"
+>从零开始搭建你的免费图床系统（Cloudflare R2 + WebP Cloud + PicGo）&lt;/a>这篇非常详细。Cloudflare开R2的时候要信用卡犹豫了一下，不过想想这个应该就是我自己的操作会影响计划用量吧，应该还是可控的，开了个计划用量邮件提醒。&lt;/p>
+&lt;p>Memos配置按Memos文档&lt;a class="link" href="https://www.usememos.com/docs/advanced-settings/cloudflare-r2#step-4:-configure-memos" target="_blank" rel="noopener"
+>Configuring Cloudflare R2 Storage step-4&lt;/a>。&lt;/p>
+&lt;h2 id="memos美化">Memos美化
+&lt;/h2>&lt;p>用了&lt;a class="link" href="https://blog.memos.ee/archives/88.html" target="_blank" rel="noopener"
+>通过memos的自定义样式更改字体为霞鹜文楷&lt;/a>、&lt;a class="link" href="https://linux.do/t/topic/162835" target="_blank" rel="noopener"
+>memos css美化分享&lt;/a>、&lt;a class="link" href="https://blog.memos.ee/archives/190.html" target="_blank" rel="noopener"
+>memos自定义CSS：标签样式、字体大小、选项卡隐藏&lt;/a>&lt;/p>
+&lt;p>Memos——设置——系统——自定义样式里添加以下代码保存：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;span class="lnt">68
+&lt;/span>&lt;span class="lnt">69
+&lt;/span>&lt;span class="lnt">70
+&lt;/span>&lt;span class="lnt">71
+&lt;/span>&lt;span class="lnt">72
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">/* 字体美化 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@import &amp;#39;//cdn.imsun.org/lxgw-wenkai-screen-webfont/lxgwwenkaigbscreen.css&amp;#39;;body {font-family:&amp;#34;LXGW WenKai Screen&amp;#34;,sans-serif;}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 设置 Memos 标签样式 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">span.inline-block.w-auto.text-blue-600.dark\:text-blue-400{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> color: #f3f3f3;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #40b76b;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> border-radius: 2px;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> padding: 2px 6px;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> font-size: 15px;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> margin-bottom: 4px;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 设置同级下不同的标签显示不同的颜色 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 第2个标签 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">span.inline-block.w-auto.text-blue-600.dark\:text-blue-400:nth-child(n+2) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #157cf5;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 第3个标签 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">span.inline-block.w-auto.text-blue-600.dark\:text-blue-400:nth-child(n+4) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #f298a6;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 第4个标签 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">span.inline-block.w-auto.text-blue-600.dark\:text-blue-400:nth-child(n+6) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #fdb15d;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 第5个标签 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">span.inline-block.w-auto.text-blue-600.dark\:text-blue-400:nth-child(n+8) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #67d6ca;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 第6个标签 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">span.inline-block.w-auto.text-blue-600.dark\:text-blue-400:nth-child(n+10) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #7445e0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 设置 Memos 文本高亮样式 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mark {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #F27579;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> color: #f3f3f3;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> padding-left:2px;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> border-radius: 2px;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 修改Memo字号 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.memo-wrapper .text-base {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> font-size: 0.95rem;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 修改代码块字号 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.text-sm {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> font-size: 0.85rem;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 隐藏 通知 选项卡 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#header-inbox {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display: none;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 隐藏 个人资料 选项卡 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#header-profile {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display: none;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 隐藏 探索 选项卡 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#header-explore {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display: none;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 修改编辑器字体为等宽 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">textarea {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> font-family: &amp;#39;Courier New&amp;#39;, Courier, monospace;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="后记">后记
+&lt;/h2>&lt;p>2024.11.21 Memos已删除。&lt;/p></description></item><item><title>Alibaba Cloud Linux安装Drupal10.0.7</title><link>https://www.darkbluesoul.cc/p/alibaba-cloud-linux%E5%AE%89%E8%A3%85drupal10.0.7/</link><pubDate>Thu, 20 Apr 2023 09:57:10 +0800</pubDate><guid>https://www.darkbluesoul.cc/p/alibaba-cloud-linux%E5%AE%89%E8%A3%85drupal10.0.7/</guid><description>&lt;img src="https://www.darkbluesoul.cc/p/alibaba-cloud-linux%E5%AE%89%E8%A3%85drupal10.0.7/drupal.png" alt="Featured image of post Alibaba Cloud Linux安装Drupal10.0.7" />&lt;p>想学下Drupal，按&lt;a class="link" href="https://help.aliyun.com/document_detail/460773.html?spm=a2c4g.440490.0.0.1d2e38d3r4E6ag" target="_blank" rel="noopener"
+>部署LAMP环境（Alibaba Cloud Linux 3）&lt;/a>部署环境，但是PHP7.4没法安装Drupal10，所以修改了一下。其实还是挺折腾的，弄了一周多的样子，各种踩坑，装好以后也是各种报错。好在这次安装基本都做了笔记，稍微整理下，供参考。&lt;/p>
+&lt;h2 id="apache24">&lt;strong>Apache2.4&lt;/strong>
+&lt;/h2>&lt;p>&lt;a class="link" href="https://httpd.apache.org/docs/2.4/install.html" target="_blank" rel="noopener"
+>Compiling and Installing - Apache HTTP Server Version 2.4&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">yum install httpd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="mysql80">&lt;strong>Mysql8.0&lt;/strong>
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">wget http://dev.mysql.com/get/mysql80-community-release-el7-7.noarch.rpm &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> yum -y install mysql80-community-release-el7-7.noarch.rpm &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> yum -y install mysql-community-server --nogpgcheck
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="php8118">&lt;strong>PHP8.1.18&lt;/strong>
+&lt;/h2>&lt;p>修改了下&lt;a class="link" href="https://help.aliyun.com/document_detail/460773.html?spm=a2c4g.440490.0.0.1d2e38d3r4E6ag" target="_blank" rel="noopener"
+>部署LAMP环境（Alibaba Cloud Linux 3）&lt;/a>里的安装PHP命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">rpm -ivh --nodeps https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">dnf update -y dnf libdnf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sed -i &lt;span class="s1">&amp;#39;s/PLATFORM_ID=&amp;#34;platform:al8&amp;#34;/PLATFORM_ID=&amp;#34;platform:el8&amp;#34;/g&amp;#39;&lt;/span> /etc/os-release
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yum -y module install php:remi-8.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sed -i &lt;span class="s1">&amp;#39;s/PLATFORM_ID=&amp;#34;platform:el8&amp;#34;/PLATFORM_ID=&amp;#34;platform:al8&amp;#34;/g&amp;#39;&lt;/span> /etc/os-release
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="phpmyadmin521">&lt;strong>phpMyAdmin5.2.1&lt;/strong>
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">mkdir -p /var/www/html/phpmyadmin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wget --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-languages.zip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">unzip phpMyAdmin-5.2.1-all-languages.zip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">mv phpMyAdmin-5.2.1-all-languages/* /var/www/html/phpmyadmin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>部署成功后，phpMyAdmin无法登录显示“缺少mysqli扩展”、修复后登录数据库，页面底部如果显示“配置文件现在需要一个短语密码”、“缺少mcrypt扩展”，解决方法如下：&lt;/p>
+&lt;h3 id="缺少mysqli扩展">缺少mysqli扩展：
+&lt;/h3>&lt;p>安装mysqli（参考&lt;a class="link" href="https://www.cnblogs.com/caryfang/p/5439299.html" target="_blank" rel="noopener"
+>linux下php-mysql拓展安装&lt;/a>）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">yum install php-mysql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="缺少mcrypt扩展">缺少mcrypt扩展：
+&lt;/h3>&lt;p>安装mcrypt（参考&lt;a class="link" href="https://www.osyunwei.com/archives/2053.html" target="_blank" rel="noopener"
+>phpMyAdmin“缺少 mcrypt 扩展。请检查 PHP 配置。”解决办法&lt;/a>）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">yum  install  php-mcrypt  libmcrypt  libmcrypt-devel
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="配置文件现在需要一个短语密码">配置文件现在需要一个短语密码：
+&lt;/h3>&lt;p>按百度经验&lt;a class="link" href="https://jingyan.baidu.com/article/adc815137733faf722bf7358.html" target="_blank" rel="noopener"
+>配置文件现在需要一个短语密码&lt;/a> 修改。&lt;/p>
+&lt;h2 id="drupal1007">&lt;strong>Drupal10.0.7&lt;/strong>
+&lt;/h2>&lt;p>修改了&lt;a class="link" href="https://help.aliyun.com/document_detail/162768.html?spm=a2c4g.162767.0.0.17f51a18NaWePM" target="_blank" rel="noopener"
+>手动搭建Drupal网站&lt;/a>这篇帮助里的一些命令，换了版本号。&lt;/p>
+&lt;p>下载Drupal：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wget https://ftp.drupal.org/files/projects/drupal-10.0.7.zip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>解压Drupal：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">yum install unzip -y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">unzip drupal-10.0.7.zip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>将安装文件移动到Apache的网站根目录:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">mv drupal-10.0.7/* /var/www/html
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mv drupal-10.0.7/.htaccess /var/www/html
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mv drupal-10.0.7/.csslintrc drupal-10.0.7/.editorconfig drupal-10.0.7/.eslintignore drupal-10.0.7/.eslintrc.json drupal-10.0.7/.gitattributes /var/www/html
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>下载中文翻译包：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> /var/www/html
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wget -P sites/default/files/translations https://ftp.drupal.org/files/translations/all/drupal/drupal-10.0.7.zh-hans.po
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>后续步骤同&lt;a class="link" href="https://help.aliyun.com/document_detail/162768.html?spm=a2c4g.162767.0.0.17f51a18NaWePM" target="_blank" rel="noopener"
+>手动搭建Drupal网站&lt;/a>。&lt;/p>
+&lt;h3 id="安装过程中cleanurl未激活">安装过程中CleanURL未激活
+&lt;/h3>&lt;p>/etc/httpd/conf/httpd.conf，找到&amp;lt;Directory &amp;ldquo;/var/www/html&amp;rdquo;&amp;gt;，将其中的&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-apache" data-lang="apache">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">AllowOverride&lt;/span> &lt;span class="k">None&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>修改为&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-apache" data-lang="apache">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">AllowOverride&lt;/span> &lt;span class="k">All&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="php-gd库缺失">php-gd库缺失：
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">yum -y install php-gd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="critical-security-announcementsthat-starts-with-failed-to-fetch-security-advisory-data">Critical security announcements that starts with &amp;ldquo;Failed to fetch security advisory data&amp;rdquo;
+&lt;/h3>&lt;p>参考&lt;a class="link" href="https://www.drupal.org/docs/updating-drupal/responding-to-critical-security-update-advisories#s-troubleshooting-the-advisory-feed" target="_blank" rel="noopener"
+>Responding to critical security update advisories | Updating Drupal | Drupal Wiki guide on Drupal.org&lt;/a>
+按&lt;a class="link" href="https://www.drupal.org/docs/system-requirements/php-openssl-requirements" target="_blank" rel="noopener"
+>PHP OpenSSL requirements | System requirements | Drupal Wiki guide on Drupal.org&lt;/a>
+修改了&lt;code>settings.php&lt;/code> file:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-php" data-lang="php">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$settings&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;update_fetch_with_http_fallback&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">TRUE&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>最近的一些想法</title><link>https://www.darkbluesoul.cc/p/%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/</link><pubDate>Wed, 29 Mar 2023 10:46:00 +0800</pubDate><guid>https://www.darkbluesoul.cc/p/%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/</guid><description>&lt;img src="https://www.darkbluesoul.cc/p/%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/cyber-brain-7633488_1920.jpg" alt="Featured image of post 最近的一些想法" />&lt;p>前面那段时间在犹豫是学BIM还是UE，虽然BIM更接近专业，但不知道为什么就是没什么兴趣。&lt;/p>
+&lt;h2 id="回忆">回忆
+&lt;/h2>&lt;p>弄游戏还是很有劲的，以前玩论坛的时候就喜欢加载各种游戏插件。玩网金（金庸群侠传online）的时候建的动网论坛基本上能装的游戏插件我都装了，反正都是大佬写的，我只管装上能用就行了。&lt;/p>
+&lt;p>印象比较深的有一个怪物大冒险（大概这名吧。。。）游戏插件，不知道现在还有没有人记得，打怪升级，好像还有个战斗动图的，下方就是你砍了对方几点血，对方砍了你几点血，赢了有经验，经验满了会升级，级别满了还能进化，进化了怪物造型就不一样了，还能把自己的怪物嵌入到个人头像里展示。当时有个弟兄为这游戏还弄挂机脚本，进化到了最高级。最后可能是因为我换discuz了或者是插件不更新了，自己又不会写，这游戏就没了。&lt;/p>
+&lt;p>现在再回头看，当时论坛用插件的时候稍微学点编程，可能就不一样了。那时改的最多的就是dispbbs.asp，就是个人信息调用那块，不懂就瞎改，改完看效果，不好就再改。直接FTP里改服务器文件的，本地测试环境也不会，最多就是把要改的文件先复制一个，有问题就再恢复。&lt;/p>
+&lt;h2 id="ue">UE
+&lt;/h2>&lt;p>哔哩哔哩很多教程都缓存了，只是静静的呆在手机里。本来是想跟着&lt;a class="link" href="https://space.bilibili.com/1414587683/channel/collectiondetail?sid=1155994" target="_blank" rel="noopener"
+>虚幻5-飞行射击对战-案例教程&lt;/a>学的，因为第一课题目好像是叫从玩游戏到做游戏，这完美戳到我了啊。千辛万苦克隆源代码，批处理生成引擎，中间下载各种慢各种找教程修改DNS修改hosts，最后发现还不如直接Epic下载。坚持到了第三课我怂了，确实是要学点C++的，我想要么换个教程先从蓝图开始学吧。。。或者我先学点C++也行。太混乱了我。&lt;/p>
+&lt;h2 id="ai">AI
+&lt;/h2>&lt;p>AI发展太快了，ChatGPT本来想试试的，弄了几次都无权使用就不高兴弄了。&lt;a class="link" href="https://stablediffusionweb.com/" target="_blank" rel="noopener"
+>StableDiffusion&lt;/a>按着&lt;a class="link" href="https://sspai.com/post/75771" target="_blank" rel="noopener"
+>AI 数字绘画 stable-diffusion 保姆级教程&lt;/a>用&lt;a class="link" href="https://research.google.com/colaboratory/faq.html?hl=zh-CN" target="_blank" rel="noopener"
+>Colab&lt;/a>跑了一下，没有很惊艳（应该是因为我prompt没设好），但还是触到我了。&lt;/p>
+&lt;h2 id="感触">感触
+&lt;/h2>&lt;p>就突然觉得是不是都不用学了啊？以后设计有AI，编程有AI，那还要学什么？学AI的使用方法？学深度学习？挺迷茫的，昨儿就玩了一天。&lt;/p>
+&lt;p>到晚上的时候大概想明白了，我学这些本来就没指望产出啊？只是我想学而已，这是我喜欢做想做的事情，那么管他结果如何啊，就是这样！&lt;/p>
+&lt;p>PS:封面图片由&lt;a class="link" href="https://pixabay.com/zh/users/deltaworks-37465/?utm_source=link-attribution&amp;amp;amp;utm_medium=referral&amp;amp;amp;utm_campaign=image&amp;amp;amp;utm_content=7633488" target="_blank" rel="noopener"
+>Kohji Asakawa&lt;/a>在&lt;a class="link" href="https://pixabay.com/zh//?utm_source=link-attribution&amp;amp;amp;utm_medium=referral&amp;amp;amp;utm_campaign=image&amp;amp;amp;utm_content=7633488" target="_blank" rel="noopener"
+>Pixabay&lt;/a>上发布&lt;/p></description></item><item><title>笨方法学Python小记</title><link>https://www.darkbluesoul.cc/p/%E7%AC%A8%E6%96%B9%E6%B3%95%E5%AD%A6python%E5%B0%8F%E8%AE%B0/</link><pubDate>Sun, 15 Jan 2023 15:19:01 +0800</pubDate><guid>https://www.darkbluesoul.cc/p/%E7%AC%A8%E6%96%B9%E6%B3%95%E5%AD%A6python%E5%B0%8F%E8%AE%B0/</guid><description>&lt;img src="https://www.darkbluesoul.cc/p/%E7%AC%A8%E6%96%B9%E6%B3%95%E5%AD%A6python%E5%B0%8F%E8%AE%B0/stupid-learn.png" alt="Featured image of post 笨方法学Python小记" />&lt;p>前几天把域名绑到hashnode去了，本来想着写写方便点，后来又觉得没啥意思，就又改回来了。&lt;/p>
+&lt;p>回老家这几天，天天玩游戏，手机电脑一起玩，一个TRAHA，一个UNDECEMBER，逆水寒开了老兵服我又去贡献了几张月卡，嗯，一个角色要一张点卡，然后我又喜欢建新号。。。&lt;/p>
+&lt;p>寒假前下了一些学Python的书，在杭州呢家里事情太多，也就断断续续的看点。而且我老换书这点很讨厌，学到现在也还是在基础知识晃悠。下午想想要么还是学点吧，主要是没什么目标。原来想开发的管理系统，现在学院准备集成到监控系统里了，中间几次讨论我也参加了，希望最后建好能好用吧。&lt;/p>
+&lt;p>《笨方法学Python》是在&lt;a class="link" href="https://zhuanlan.zhihu.com/p/89933479" target="_blank" rel="noopener"
+>知乎&lt;/a>上找的，为了在kindle上看还下了&lt;a class="link" href="https://www.willus.com/k2pdfopt/" target="_blank" rel="noopener"
+>K2pdfopt&lt;/a>重排，排版效果不错，就是静不下心来看。下午算是看了一点了，这本书强调手输代码查错改错，敲代码的时候就是各种符号打打觉得很麻烦，平时打字这些括弧啊斜杠啊用到很少。看了五分之一，新知识学到不多，大部分错误都是Python版本的问题，不过后面应该不懂的会多起来了。&lt;/p>
+&lt;p>其实这篇是为了测试下我改来改去有没有问题的，这台电脑原来也没&lt;code>git clone&lt;/code>过远程库，本地预览一直出错，记得以前是要把远程主题拉下来才能正常的，忘了怎么弄了，就这样直接&lt;code>git push&lt;/code>下看看行不行。&lt;/p>
+&lt;p>VSCode装了GitHub插件，方便还是方便的，就是push的时候太慢了，经常网络连接错误，好在最后还是传上去了。&lt;/p>
+&lt;p>2023.3.20：目前在看&lt;a class="link" href="https://www.bookstack.cn/read/LearnPython3TheHardWay/spilt.1.learn-py3.md" target="_blank" rel="noopener"
+>笨办法学Python3（Learn Python3 The Hard Way 中文版）&lt;/a>&lt;/p></description></item><item><title>Python Crash Course学习笔记</title><link>https://www.darkbluesoul.cc/p/python-crash-course%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Mon, 18 Apr 2022 08:52:10 +0800</pubDate><guid>https://www.darkbluesoul.cc/p/python-crash-course%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;img src="https://www.darkbluesoul.cc/p/python-crash-course%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/python-course.jpg" alt="Featured image of post Python Crash Course学习笔记" />&lt;p>最近在学《Python Crash Course》第一版，可能是版本的原因，抄作业经常会出错，网上找了下解决办法。&lt;/p>
+&lt;h2 id="error--requestsexceptionsproxyerror1714处理api响应">Error&amp;ndash;requests.exceptions.ProxyError【17.1.4　处理API响应】
+&lt;/h2>&lt;p>调用API一直报错，请求异常，代理错误。
+参考:&lt;a class="link" href="https://blog.csdn.net/qq_39241986/article/details/80457017" target="_blank" rel="noopener"
+>令人不悦的Error&amp;ndash;requests.exceptions.ProxyError&lt;/a>
+python_repos.py修改：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 执行API调用并存储响应&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">url&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;https://api.github.com/search/repositories?q=language:python&amp;amp;sort=stars&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">r&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">requests&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Status code:&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">r&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">status_code&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>为：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 执行API调用并存储响应&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">url&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;https://api.github.com/search/repositories?q=language:python&amp;amp;sort=stars&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 绕过系统代理&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">proxies&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="s2">&amp;#34;http&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;https&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">r&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">requests&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">proxies&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">proxies&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Status code:&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">r&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">status_code&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="无法加载文件scriptsactivateps11814激活虚拟环境">无法加载文件Scripts\Activate.ps1【18.1.4　激活虚拟环境】
+&lt;/h2>&lt;p>&lt;code>ll_env\Scripts\activate&lt;/code>一直激活不了虚拟环境，报错无法加载文件。
+参考：&lt;a class="link" href="https://blog.csdn.net/weixin_43031092/article/details/113412866" target="_blank" rel="noopener"
+>Win10 VS Code pipenv无法加载文件Scripts\Activate.ps1&lt;/a>
+我是直接在VS自带的终端输入&lt;code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned&lt;/code>回车，然后就好了。&lt;/p>
+&lt;h2 id="error-requested-setting-installed_apps-but-settings-are-not-configured1816在django中创建项目">Error: Requested setting INSTALLED_APPS, but settings are not configured【18.1.6　在Django中创建项目】
+&lt;/h2>&lt;p>新建项目&lt;code>django-admin.py startproject learning_log .&lt;/code>报错。
+参考：&lt;a class="link" href="https://blog.csdn.net/zjiang1994/article/details/52680731" target="_blank" rel="noopener"
+>Python [解决方法] error: Requested setting INSTALLED_APPS, but settings are not configured&lt;/a>
+修改：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">django-admin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="py">py&lt;/span> &lt;span class="n">startproject&lt;/span> &lt;span class="n">learning_log&lt;/span> &lt;span class="p">.&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>为：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">django-admin&lt;/span> &lt;span class="n">startproject&lt;/span> &lt;span class="n">learning_log&lt;/span> &lt;span class="p">.&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="typeerror-__init__-missing-1-required-positional-argument-on_delete1825迁移模型entry">TypeError: &lt;strong>init&lt;/strong>() missing 1 required positional argument: ‘on_delete‘【18.2.5　迁移模型Entry】
+&lt;/h2>&lt;p>&lt;code>python manage.py makemigrations learning_logs&lt;/code>出错，显示&lt;code>TypeError: __init__() missing 1 required positional argument: ‘on_delete‘&lt;/code>。&lt;/p>
+&lt;p>参考：&lt;a class="link" href="https://blog.csdn.net/yu12345_/article/details/120039586" target="_blank" rel="noopener"
+>【异常】TypeError: &lt;strong>init&lt;/strong>() missing 1 required positional argument: ‘on_delete‘&lt;/a>，在【18.2.4　定义模型Entry】models.py定义外键时加上位参on_delete。
+修改：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">Entry&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">models&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Model&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;学到的有关某个主题的具体知识&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">topic&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">models&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ForeignKey&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Topic&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>为：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">Entry&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">models&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Model&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;学到的有关某个主题的具体知识&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">topic&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">models&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ForeignKey&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Topic&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">on_delete&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">models&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">CASCADE&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>小程序积分排行</title><link>https://www.darkbluesoul.cc/p/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%A7%AF%E5%88%86%E6%8E%92%E8%A1%8C/</link><pubDate>Wed, 02 Mar 2022 16:09:30 +0800</pubDate><guid>https://www.darkbluesoul.cc/p/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%A7%AF%E5%88%86%E6%8E%92%E8%A1%8C/</guid><description>&lt;p>企业微信里写了个小程序，对学生的积分进行管理，前段时间无聊想着弄个排名吧，因为平时也有扣分，那些平时表现好的犯错跟其他成员扣分一样扣，总觉得亏了点，于是就抄王者荣耀搞了奖分等级，等级高点的扣分的时候就打个折。懒得改小程序，就每个月导出数据库统计一次，扣分打折根据统计出来的排名折扣口算输入。新学期，想着长痛不如短痛，还是直接做在小程序里好了。&lt;/p>
+&lt;h2 id="云数据库新建rank集合">云数据库新建rank集合
+&lt;/h2>&lt;p>字段一开始只有name，reward，graduate三个个字段，后来发现坑了，哪怕数据权限改成“所有用户可读，仅创建者可读写”也无法修改数据，只好再加了个_openid字段，值全部是我自己的openid，然后才正常了，也就是加了openid我才有权限修改，这里折腾了很久，一直以为是自己逻辑弄错了。&lt;/p>
+&lt;h2 id="pagesadminadminjs奖惩处理">pages/admin/admin.js //奖惩处理
+&lt;/h2>&lt;h3 id="数据库初始化">数据库初始化
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// score集合保存所有学生的奖惩记录
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">score&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">db&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">collection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;score&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">rankCollection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">db&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">collection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;rank&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="输入姓名从rank集合读取排名计算扣分时的折扣rate">输入姓名从rank集合读取排名计算扣分时的折扣rate
+&lt;/h3>&lt;p>这里我傻了点，我是用for循环找有序数组里对应用户的排名的，其实直接在取好的数组里添加一个顺序字段index，后面直接读取index就可以了。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 从rank集合按降序提取前10名未毕业的同学
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">rank10&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">db&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">collection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;rank&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">where&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">graduate&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}).&lt;/span>&lt;span class="nx">limit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">orderBy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;reward&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;desc&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 奖惩时输入姓名查找前十名次，计算折扣
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">inputName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">event&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">nowname&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">event&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">detail&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rank10&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">get&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">success&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setData&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rate&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="c1">//查找排名
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">name&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nx">event&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">detail&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">){&lt;/span>&lt;span class="kd">var&lt;/span> &lt;span class="nx">rate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">0.5&lt;/span>&lt;span class="p">;}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">){&lt;/span>&lt;span class="kd">var&lt;/span> &lt;span class="nx">rate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">0.7&lt;/span>&lt;span class="p">;}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">6&lt;/span>&lt;span class="p">){&lt;/span>&lt;span class="kd">var&lt;/span> &lt;span class="nx">rate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">0.8&lt;/span>&lt;span class="p">;}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="kd">var&lt;/span> &lt;span class="nx">rate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">0.9&lt;/span>&lt;span class="p">;}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">rate&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setData&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rate&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">rate&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="奖惩操作负分打折正分累加">奖惩操作：负分打折，正分累加
+&lt;/h3>&lt;p>参考&lt;a class="link" href="https://blog.csdn.net/Shids_/article/details/110142163" target="_blank" rel="noopener"
+>小程序调用另一个函数方法中的值&lt;/a>调用rate，保存数据时判断分数小于0，则乘以rate。累加那段折腾了很久，一开始用的get.where判断用success箭头函数，但就是要么不生效要么新增数据两倍累加，也不懂，就不停试，直到后来看到&lt;a class="link" href="https://www.w3school.com.cn/js/js_errors.asp" target="_blank" rel="noopener"
+>JavaScript 错误 - Throw 和 Try to Catch (w3school.com.cn)&lt;/a>，试了下，好像可以，想着里面应该是个函数，确实可行，就先这样了。中间还出了个拼写错误，现在就不知道试的过程中还有没有别的方法是可以用的了。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 添加奖惩信息
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">saveuserinfo&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">score1&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">){&lt;/span> &lt;span class="c1">//负分处理
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nx">rate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">rate&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">score&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">add&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="c1">//添加折后数据
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">nowname&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">score&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">score1&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="nx">rate&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">//扣分打折
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">detail&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">detail&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">content&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">content&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">time&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">time&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}).&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;奖惩成功！&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">wx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">showToast&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">title&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;奖惩成功！&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">icon&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;success&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">3000&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">{&lt;/span> &lt;span class="c1">//正分处理
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">score&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">add&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="c1">//添加奖分数据
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">nowname&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">score&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">score1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">//奖分不打折
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">detail&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">detail&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">content&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">content&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">time&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">time&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}).&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;奖惩成功！&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">wx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">showToast&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">title&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;奖惩成功！&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">icon&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;success&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">duration&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">3000&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//加分写入rank集合，if的几种情况不累加，不知道怎么or。。。
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">content&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;申请通过&amp;#34;&lt;/span>&lt;span class="p">){}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">content&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;申请成功&amp;#34;&lt;/span>&lt;span class="p">){}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">content&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;战队排行&amp;#34;&lt;/span>&lt;span class="p">){}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">content&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;提交检讨&amp;#34;&lt;/span>&lt;span class="p">){}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">{&lt;/span> &lt;span class="c1">//把加分累加到总奖分里
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">nowname&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="nx">score1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//先添加数据，数据库name唯一索引，已有name会出错，错误时更新reward
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">rankCollection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">add&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">data&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">graduate&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">//既然有加分那肯定没毕业
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">nowname&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">reward&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">score1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}).&lt;/span>&lt;span class="k">catch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;已有用户数据,更新总奖分&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rankCollection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">where&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">nowname&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}).&lt;/span>&lt;span class="nx">update&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">data&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">reward&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">_&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">inc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">score1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="pagesindexindexjs首页等级逻辑">pages/index/index.js //首页等级逻辑
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 读取当前用户在前十名中的名次，未匹配则为青铜
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;[获取]user集合用户姓名: &amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">nowname&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">rankCollection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">where&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="c1">//毕业学生全部都是传奇王者
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">nowname&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="nx">get&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">success&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">graduate&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setData&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">grade&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;☆☆☆☆☆传奇王者☆☆☆☆☆&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;等级: &amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">grade&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">rank10&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">get&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">success&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setData&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">grade&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;★倔强青铜★&amp;#34;&lt;/span> &lt;span class="c1">//在校生默认青铜
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="c1">//查找前十名次
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">name&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nx">nowname&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">){&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setData&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">grade&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;★★★★★荣耀王者★★★★★&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">){&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setData&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">grade&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;★★★★至尊星耀★★★★&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">6&lt;/span>&lt;span class="p">){&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setData&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">grade&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;★★★永恒钻石★★★&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setData&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">grade&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;★★尊贵铂金★★&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">grade&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">fail&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="c1">//从来没加过分的同学都是青铜
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setData&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">grade&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;★倔强青铜★&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="pagesindexindexwxml首页渲染">pages/index/index.wxml //首页渲染
+&lt;/h2>&lt;p>用了个&lt;a class="link" href="https://youzan.github.io/vant-weapp/#/quickstart" target="_blank" rel="noopener"
+>Vant Weapp&lt;/a>的UI组件vantvan-button展示等级，CSS我不知道怎么修改，就只好挑自己喜欢的组件用了。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;van-button&lt;/span> &lt;span class="na">type=&lt;/span>&lt;span class="s">&amp;#34;warning&amp;#34;&lt;/span> &lt;span class="na">size=&lt;/span>&lt;span class="s">&amp;#34;large&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>{{grade}}&lt;span class="nt">&amp;lt;/van-button&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="前十名次计算的另一种思路">前十名次计算的另一种思路
+&lt;/h2>&lt;p>用for循环增加index名次字段，然后读取名次就好了，做前二十的排行榜的时候网上找的办法。&lt;/p>
+&lt;p>按前面的方法，rank20只有名字和总奖分，渲染的页面就是一个ranklist循环：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="c">&amp;lt;!--pages/rank/rank.wxml--&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;block&lt;/span> &lt;span class="na">wx:for=&lt;/span>&lt;span class="s">&amp;#34;{{ranklist}}&amp;#34;&lt;/span> &lt;span class="na">wx:key=&lt;/span>&lt;span class="s">&amp;#34;_id&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;van-cell&lt;/span> &lt;span class="na">value=&lt;/span>&lt;span class="s">&amp;#34;{{item.reward}}&amp;#34;&lt;/span> &lt;span class="err">center&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;view&lt;/span> &lt;span class="na">slot=&lt;/span>&lt;span class="s">&amp;#34;title&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;view&lt;/span> &lt;span class="na">class=&lt;/span>&lt;span class="s">&amp;#34;van-cell-text&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>{{item.index}}. {{item.name }}&lt;span class="nt">&amp;lt;/view&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;van-tag&lt;/span> &lt;span class="na">type=&lt;/span>&lt;span class="s">&amp;#34;danger&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>{{item.grade}}&lt;span class="nt">&amp;lt;/van-tag&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/view&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/van-cell&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/block&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>不知道怎么在wxml加其他要展示的信息，那就只能在rank.js里想办法了。
+pages/rank/rank.js：for循环添加名次index和等级grade字段到ranklist。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">rank20&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">db&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">collection&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;rank&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">where&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">graduate&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}).&lt;/span>&lt;span class="nx">limit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">orderBy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;reward&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;desc&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">rank20&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">get&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kr">async&lt;/span> &lt;span class="nx">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">ranklist&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">res&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">data&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// console.log(ranklist)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="nx">ranklist&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ranklist&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">index&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Number&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">Number&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">){&lt;/span>&lt;span class="nx">ranklist&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">grade&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;★★★★★荣耀王者★★★★★&amp;#34;&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">Number&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">){&lt;/span>&lt;span class="nx">ranklist&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">grade&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;★★★★至尊星耀★★★★&amp;#34;&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Number&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">6&lt;/span>&lt;span class="p">){&lt;/span>&lt;span class="nx">ranklist&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">grade&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;★★★永恒钻石★★★&amp;#34;&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Number&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">){&lt;/span>&lt;span class="nx">ranklist&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">grade&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;★★尊贵铂金★★&amp;#34;&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nx">ranklist&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">grade&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;★倔强青铜★&amp;#34;&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// console.log(ranklist)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setData&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">ranklist&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">ranklist&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="结语">结语
+&lt;/h2>&lt;p>开学一个礼拜就干了这个，换成懂的人，估计几分钟就解决了吧，那几天脑子里都在想为什么写的跟实现的不一样，怎么才能解决，然后就是各种搜索。官方文档确实很有用，有些问题就是直接抄的官方文档里的代码稍微改改就可以了。&lt;/p>
+&lt;p>挺好的，实现了自己想要的功能，很有成就感。&lt;/p></description></item><item><title>Adam Blog 2.0主题修改</title><link>https://www.darkbluesoul.cc/p/adam-blog-2.0%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/</link><pubDate>Wed, 29 Dec 2021 09:42:20 +0800</pubDate><guid>https://www.darkbluesoul.cc/p/adam-blog-2.0%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/</guid><description>&lt;h2 id="删除mailchimp">删除mailchimp
+&lt;/h2>&lt;p>mailchimp原来的账号想不起来了，暂时懒得弄，不知道用邮件订阅的多不多？
+_config.yml里面mailchimp注释掉好像也有显示的，有点忘了，不喜欢，就直接把newsletter.html整个注释掉了，就不显示了。&lt;/p>
+&lt;h2 id="修改disqus为来必力">修改Disqus为来必力
+&lt;/h2>&lt;p>国内访问disqus实在太慢了，改成&lt;a class="link" href="http://livere.com/" target="_blank" rel="noopener"
+>来必力&lt;/a>好像还行，不过也不是很快,先用着吧。
+打开_includes/disqus.html，找到&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">{% if site.discus_identifier %}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这个是判断config有没有填写disqus帐号的，有就显示评论，没有就不显示，我把这条删了;&lt;/p>
+&lt;p>找到&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;disqus_thread&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>在中间加入你的来必力代码，加好以后就下面这样：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;disqus_thread&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c">&amp;lt;!-- 来必力City版安装代码,隐藏广告id --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">style&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">#&lt;/span>&lt;span class="nn">taboola-livere&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">display&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">none&lt;/span>&lt;span class="p">;}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">style&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;lv-container&amp;#34;&lt;/span> &lt;span class="na">data-id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;city&amp;#34;&lt;/span> &lt;span class="na">data-uid&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;M*****************==&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;text/javascript&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="kd">function&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">d&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">s&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">j&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">e&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">d&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getElementsByTagName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">s&lt;/span>&lt;span class="p">)[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">typeof&lt;/span> &lt;span class="nx">LivereTower&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;function&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">j&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">d&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">createElement&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">s&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">j&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">src&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;https://cdn-city.livere.com/js/embed.dist.js&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">j&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">async&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">e&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">parentNode&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">insertBefore&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">j&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">e&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})(&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;script&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">noscript&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> 为正常使用来必力评论功能请激活JavaScript&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">noscript&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c">&amp;lt;!-- City版安装代码已完成 --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>删除原disqus代码：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="nx">script&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">d&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">s&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">d&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">createElement&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;script&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">s&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">src&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;//{{ site.discus_identifier }}.disqus.com/embed.js&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">s&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setAttribute&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;data-timestamp&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">+&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="nx">d&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">head&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="nx">d&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">appendChild&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">s&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="err">/script&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="nx">noscript&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="nx">Please&lt;/span> &lt;span class="nx">enable&lt;/span> &lt;span class="nx">JavaScript&lt;/span> &lt;span class="nx">to&lt;/span> &lt;span class="nx">view&lt;/span> &lt;span class="nx">the&lt;/span> &lt;span class="nx">comments&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="err">/noscript&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>保存。&lt;/p>
+&lt;h2 id="修改中文字数统计">修改中文字数统计
+&lt;/h2>&lt;p>这个模板英文统计没问题，中文么就不行了，参照&lt;a class="link" href="https://github.com/jekyll/jekyll/issues/1921" target="_blank" rel="noopener"
+> The filter number_of_words can&amp;rsquo;t parse Chinese correctly #1921 &lt;/a>&lt;/p>
+&lt;p>打开_includes/post-meta.html，找到&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">{% assign words = document.content | strip_html | number_of_words %}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>修改为&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">{% assign words = document.content | strip_html | size %}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>就可以正常统计中文字数了。阅读时间就没改了，好像有篇文章说英文跟中文阅读速度差不多的，恩，主要是懒。&lt;/p>
+&lt;h2 id="修改摘要显示">修改摘要显示
+&lt;/h2>&lt;p>模板本来是按100个单词截取摘要的，本来以为我中文字数改了也会正常了，结果存档页还是整篇显示，搜了一下，&lt;a class="link" href="https://cyhour.com/189/" target="_blank" rel="noopener"
+>Jekyll 使用记录&lt;/a>这里找到办法了，原来&lt;a class="link" href="http://jekyllrb.com/docs/posts/#post-excerpts" target="_blank" rel="noopener"
+>官方文档&lt;/a>就有写的。&lt;/p>
+&lt;p>在_config.yml里面添加一行&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">excerpt_separator&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;&amp;lt;!--more--&amp;gt;&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>然后打开_pages/archive.html，找到&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">{{ post.content | markdownify | strip_newlines | truncatewords: 100 }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>改为&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">{{ post.excerpt }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这样设置有点烦的地方就是每篇文章里都要在摘要后面加上&lt;code>&amp;lt;!--more--&amp;gt;&lt;/code>，多了自定义的快乐，少了自动的简便。不过没事，复制粘贴一下也不会很辛苦。其实这里我弄了好久，还以为自己代码弄错了，结果一个呢是config里面定义分割符的时候少了引号，还一个最坑的就是我一直在改_layouts/post.html，all post页面其实是archive.html。&lt;/p>
+&lt;p>唉，思维惯势不可取，还一点是要细心，其实目录结构里看一下就知道了，就是每次翻倒都是扫一眼就过，该。&lt;/p>
+&lt;p>PS:发布的时候一直出错，显示&amp;rsquo;if&amp;rsquo; tag was never closed，按&lt;a class="link" href="https://blog.csdn.net/zhangpeterx/article/details/103920538" target="_blank" rel="noopener"
+>GitHub 博客&amp;ndash; Jekyll&amp;ndash;代码高亮，Liquid 转义字符&lt;/a>的方法加了raw终于解决了，还一个就是tag里我写了个size。。。两个问题我花了好几个小时才解决。&lt;/p></description></item><item><title>inkscape修改logo</title><link>https://www.darkbluesoul.cc/p/inkscape%E4%BF%AE%E6%94%B9logo/</link><pubDate>Mon, 27 Dec 2021 19:32:10 +0800</pubDate><guid>https://www.darkbluesoul.cc/p/inkscape%E4%BF%AE%E6%94%B9logo/</guid><description>&lt;p>建好博客第一件事情就是改logo，毕竟不好顶着别人的名字啊，一开始想着简单弄个好了。&lt;/p>
+&lt;p>SVG不知道用什么打开，搜了下是AI，再搜Linux替代AI的软件，就找到inkscape了。之前只用过PS，好在是中文的？想不起来是不是中文的了，就按着原logo.svg的尺寸新建了个，文本输入DARKBLUESOUL，改了个字体，保存替换了原来的文件。&lt;code>jekyll serve&lt;/code>，本地看看很满意，就push上去了。&lt;/p>
+&lt;p>&lt;img src="https://s2.loli.net/2021/12/28/RBtfcoFNXbVxQjJ.png"
+loading="lazy"
+alt="DARKBLUESOULlast.png"
+>&lt;/p>
+&lt;p>换台电脑看就又不一样了，字体没了，变成黑体的样子了，想着也无所谓，先这样吧。&lt;/p>
+&lt;p>&lt;img src="https://s2.loli.net/2021/12/28/y17JN6VQifajCkD.png"
+loading="lazy"
+alt="DARKBLUESOUL.png"
+>&lt;/p>
+&lt;p>过了几天无聊了，就仿着原来的logo也弄了个圈圈，里面么就要把D、B、S都要包含进去，就想了上面这样的图。字也分成两排，不会配色，就把原来的logo打开吸点颜色，弄好了看看也还行。结果同事过来一看，“哟，这是SB嘛，可以可以”。不管他，我还是放上去了，又是没字体，字跟图都挤一块儿了，那我有点受不了了。想着是不是删格化图层可以试试，可是inkscape没有这功能，就以为AI会有，又在另外电脑下了个AI，可惜也没找到删除化功能。&lt;/p>
+&lt;p>既然下了AI，那就在AI上弄呗。配合以前做的favicon的黑红做了下面这张，其实图片本来还挺满意的，只是存好再看还是因为字体丢失就很难看。无聊点了个右键，发现了新大陆，可以把对象导出的哦，就把字啊图啊，全部导出PNG，然后再插回到SVG里，字的样子是不变了，只是，好像加载很慢啊？&lt;/p>
+&lt;p>&lt;img src="https://s2.loli.net/2021/12/28/6Dpia73tCUN5HLs.png"
+loading="lazy"
+alt="MVM-logo-full.png"
+>&lt;/p>
+&lt;p>搜了下字体丢失，说是要转路径，忘了哪篇了，本来想着所有搜索的都要存着，只是找东西的时候就忘了。&lt;/p>
+&lt;p>AI应该是叫建立轮廓，终于可以了，字体都在了，本地看看也还行，只是等我push到github多看了几次，就又觉得难看了。&lt;/p>
+&lt;p>两台电脑我用坚果云同步的，已经拷贝到img目录我就懒得再弄回去了，直接用inkscape编辑了，已经弄的很烦了，还是用了最早的字体全名，想着找轮廓，结果没找到，再仔细一看，菜单里本来就有转换路径，很方便的，只是原来我不知道这个干嘛用的。&lt;/p>
+&lt;p>&lt;img src="https://s2.loli.net/2021/12/28/RBtfcoFNXbVxQjJ.png"
+loading="lazy"
+alt="DARKBLUESOULlast.png"
+>&lt;/p>
+&lt;p>所以现在我又回到最早的版本了，现在是路径了，不会再丢字体了。也好的，兜来兜去，知道的又多了点，不是么？&lt;/p></description></item><item><title>jekyll之折腾</title><link>https://www.darkbluesoul.cc/p/jekyll%E4%B9%8B%E6%8A%98%E8%85%BE/</link><pubDate>Fri, 17 Dec 2021 13:32:20 -0600</pubDate><guid>https://www.darkbluesoul.cc/p/jekyll%E4%B9%8B%E6%8A%98%E8%85%BE/</guid><description>&lt;h2 id="jekyll对新手略难">jekyll对新手略难
+&lt;/h2>&lt;p>Linux Mint安装&lt;a class="link" href="http://jekyllcn.com/" target="_blank" rel="noopener"
+>jekyll&lt;/a>，有点忘了，装ruby就折腾了好久，各种出错，应该就是Linux命令不熟的原因，最后算是弄好了，git push都正常，就是觉得主题不好看，下个主题么，又是缺东少西的，就懒得弄了。后面无聊搜了下Linux发行版的排名，下了个排第一的MXLinux，重装系统，jekyll啥的就都没了。&lt;/p>
+&lt;h2 id="gridea简单模板少">Gridea简单，模板少
+&lt;/h2>&lt;p>懒得再装jekyll，试了下grdiea，很方便，可惜模板太少了。像我这种连CSS都懒得改的，那就最好是拿来就能用的。然后看网上说什么现在jekyll都转hugo了，就又想着用hugo。&lt;/p>
+&lt;h2 id="hugo很方便">hugo很方便
+&lt;/h2>&lt;p>尤其是我选的&lt;a class="link" href="https://themes.gohugo.io/themes/hugo-academic/" target="_blank" rel="noopener"
+>acdemic&lt;/a>主题，&lt;a class="link" href="https://wowchemy.com/zh/" target="_blank" rel="noopener"
+>wowchemy&lt;/a>系列，支持netlify一键部署到github，而且repo名随意，建好了自定义个netlify二级域名就可以访问了。
+其实我建了两个，另一个是hogo-blog什么的，就是几个喜欢的主题都是头像在最上面的，不喜欢，还一点就是要本地生成public再部署，也不喜欢。
+舍弃wowchemy，干脆自己部署，主题找了个even，还不错，就是hugo serve后本地访问没问题，push到github就无法访问，最后才想起自己部署错了，把整个站点push上去了，当然没法访问。&lt;/p>
+&lt;h2 id="再用回jekyll就觉得简单了">再用回jekyll就觉得简单了
+&lt;/h2>&lt;p>无聊看了下jekyll的主题，就第一个&lt;a class="link" href="http://jekyllthemes.org/themes/adam-blog-2/" target="_blank" rel="noopener"
+>Adam Blog ver2.0&lt;/a>，手机访问很好看啊，又开始折腾jekyll。
+MXlinux安装ruby：
+&lt;code>sudo apt-get install ruby&lt;/code>
+结果出错，说要单独安装dev，网上查了下，应该是要装完整包，再用
+&lt;code>sudo apt-get install ruby-full&lt;/code>
+就解决了。
+&lt;code>gem install jekyll&lt;/code>
+安装到最后说没权限，要求密码，输入root用户密码就可以了。后面再装就直接
+&lt;code>sudo gem install jekyll&lt;/code>
+就没有这个问题了。
+jekyll主题是下的zip，解压以后修改config，再
+&lt;code>bundle install&lt;/code>
+再git全套就好了，
+&lt;code>git push -u origin master&lt;/code>出错，被拒绝，搜了下用
+&lt;code>git push -f&lt;/code>
+解决了。
+现在犯愁的是SVG没弄过，这几天还要再下个AI做一个。
+总之，先这样吧，域名也绑了，这两天在纠结要不要阿里云买个便宜点的域名做个备案，只是便宜的后缀都好长，三位的两个我前面都买了又不想用在博客上。算了，贵点就贵点吧，看今年能不能坚持写下去吧。&lt;/p>
+&lt;p>2022.05.03 换&lt;strong>hugo&lt;/strong>了。&lt;/p></description></item><item><title>归档</title><link>https://www.darkbluesoul.cc/archives/</link><pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate><guid>https://www.darkbluesoul.cc/archives/</guid><description/></item><item><title>关于</title><link>https://www.darkbluesoul.cc/%E5%85%B3%E4%BA%8E/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.darkbluesoul.cc/%E5%85%B3%E4%BA%8E/</guid><description>&lt;p>A messy programming learner.&lt;/p></description></item><item><title>链接</title><link>https://www.darkbluesoul.cc/%E9%93%BE%E6%8E%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.darkbluesoul.cc/%E9%93%BE%E6%8E%A5/</guid><description>&lt;p>To use this feature, add &lt;code>links&lt;/code> section to frontmatter.&lt;/p>
+&lt;p>This page&amp;rsquo;s frontmatter:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">links&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">title&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">GitHub&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">description&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">GitHub is the world&amp;#39;s largest software development platform.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">website&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://github.com&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">title&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">TypeScript&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">description&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">website&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://www.typescriptlang.org&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ts-logo-128.jpg&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>image&lt;/code> field accepts both local and external images.&lt;/p></description></item><item><title>搜索</title><link>https://www.darkbluesoul.cc/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.darkbluesoul.cc/search/</guid><description/></item></channel></rss>

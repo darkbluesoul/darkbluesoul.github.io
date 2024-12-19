@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Memos on Darkblue Soul</title><link>https://www.darkbluesoul.cc/tags/memos/</link><description>Recent content in Memos on Darkblue Soul</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 19 Nov 2024 15:08:59 +0800</lastBuildDate><atom:link href="https://www.darkbluesoul.cc/tags/memos/index.xml" rel="self" type="application/rss+xml"/><item><title>Memos+Caddy+Cloudflare自建微博</title><link>https://www.darkbluesoul.cc/p/memos-caddy-cloudflare%E8%87%AA%E5%BB%BA%E5%BE%AE%E5%8D%9A/</link><pubDate>Tue, 19 Nov 2024 15:08:59 +0800</pubDate><guid>https://www.darkbluesoul.cc/p/memos-caddy-cloudflare%E8%87%AA%E5%BB%BA%E5%BE%AE%E5%8D%9A/</guid><description>&lt;img src="https://www.darkbluesoul.cc/p/memos-caddy-cloudflare%E8%87%AA%E5%BB%BA%E5%BE%AE%E5%8D%9A/memos.png" alt="Featured image of post Memos+Caddy+Cloudflare自建微博" />&lt;p>微博每次发了过几天就忍不住又改成自己可见，不知道是在担心什么。前段时间看到有介绍Memos自建微博的，略心动。这两天网上逛逛看到了Racknerd双11特惠VPS好便宜，没忍住。。。干脆$21.72买了两年。刚才想去找下链接，好像已经下架了。&lt;/p>
+&lt;p>最低配置如下：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>RAM&lt;/td>
+&lt;td>1 GB RAM&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CPU Cores&lt;/td>
+&lt;td>1 CPU Core&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Operating System&lt;/td>
+&lt;td>CentOS 7 64 Bit&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>买的时候随便挑了个系统是CentOS7的，不大会用，为了用Docker安装Memos，直接reinstall了个Ubuntu 18.04 with Docker，这样就把装Docker这步省掉了，然后绑了个子域名[memos.darkbluesoul.cc]到VPS。&lt;/p>
+&lt;h2 id="memos安装">Memos安装
+&lt;/h2>&lt;p>&lt;a class="link" href="https://www.usememos.com/docs/install/container-install" target="_blank" rel="noopener"
+>Memos文档Container Install - Memos&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">docker&lt;/span> &lt;span class="n">run&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="n">d&lt;/span> \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">--&lt;/span>&lt;span class="n">init&lt;/span> \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">--&lt;/span>&lt;span class="n">name&lt;/span> &lt;span class="n">memos&lt;/span> \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">--&lt;/span>&lt;span class="n">publish&lt;/span> &lt;span class="mi">5230&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">5230&lt;/span> \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">--&lt;/span>&lt;span class="n">volume&lt;/span> &lt;span class="o">~/.&lt;/span>&lt;span class="n">memos&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">opt&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">memos&lt;/span> \
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">neosmemo&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">memos&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">stable&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>装完直接&lt;code>memos.darkbluesoul.cc:5230&lt;/code>就能访问了。&lt;/p>
+&lt;h2 id="caddy安装">caddy安装
+&lt;/h2>&lt;p>本来Memos+Caddy按&lt;a class="link" href="https://www.usememos.com/docs/install/https" target="_blank" rel="noopener"
+>Using HTTPS&lt;/a>用Docker compose安装是最方便的，但是我前面安装compose都弄不好，干脆不用了。后来是按
+&lt;a class="link" href="https://caddyserver.com/docs/install" target="_blank" rel="noopener"
+>Install — Caddy Documentation&lt;/a>安装的，下面代码我全部粘贴到XShell运行只运行了第一行，后来是一行一行粘进去运行的。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -1sLf &amp;#39;https://dl.cloudsmith.io/public/caddy/stable/gpg.key&amp;#39; | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">curl -1sLf &amp;#39;https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt&amp;#39; | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt install caddy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="caddy反向代理">Caddy反向代理
+&lt;/h2>&lt;p>修改/etc/caddy/Caddyfile，nano我用不习惯，还是用vi了。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vi /etc/caddy/Caddyfile
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>将Caddyfile中&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">:80 {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Set this path to your site&amp;#39;s directory.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> root * /usr/share/caddy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Enable the static file server.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> file_server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Another common task is to set up a reverse proxy:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # reverse_proxy localhost:8080
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Or serve a PHP site through php-fpm:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # php_fastcgi localhost:9000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>改为&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">memos.your-domain.com {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Set this path to your site&amp;#39;s directory.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # root * /usr/share/caddy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Enable the static file server.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> file_server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Another common task is to set up a reverse proxy:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> reverse_proxy localhost:5230
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # Or serve a PHP site through php-fpm:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> # php_fastcgi localhost:9000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>就用了caddy自带的TLS和反向代理到memos：5230端口&lt;/p>
+&lt;p>修改后&lt;code>:wq&lt;/code>保存退出。&lt;/p>
+&lt;p>重启Caddy使配置生效：&lt;code>systemctl reload caddy&lt;/code>&lt;/p>
+&lt;p>然后就可以直接通过&lt;code>memos.darkbluesoul.cc&lt;/code>访问Memos了。&lt;/p>
+&lt;h2 id="cloudflare-r2-图床">Cloudflare R2 图床
+&lt;/h2>&lt;p>Cloudflare的配置按&lt;a class="link" href="https://hahagood.com/post/2024/03/20240306212529-setup_cloudflare_r2_bucket_for_memos/" target="_blank" rel="noopener"
+>配置 Cloudflare R2 存储 - Memos&lt;/a>，还有&lt;a class="link" href="https://www.pseudoyu.com/zh/2024/06/30/free_image_hosting_system_using_r2_webp_cloud_and_picgo/" target="_blank" rel="noopener"
+>从零开始搭建你的免费图床系统（Cloudflare R2 + WebP Cloud + PicGo）&lt;/a>这篇非常详细。Cloudflare开R2的时候要信用卡犹豫了一下，不过想想这个应该就是我自己的操作会影响计划用量吧，应该还是可控的，开了个计划用量邮件提醒。&lt;/p>
+&lt;p>Memos配置按Memos文档&lt;a class="link" href="https://www.usememos.com/docs/advanced-settings/cloudflare-r2#step-4:-configure-memos" target="_blank" rel="noopener"
+>Configuring Cloudflare R2 Storage step-4&lt;/a>。&lt;/p>
+&lt;h2 id="memos美化">Memos美化
+&lt;/h2>&lt;p>用了&lt;a class="link" href="https://blog.memos.ee/archives/88.html" target="_blank" rel="noopener"
+>通过memos的自定义样式更改字体为霞鹜文楷&lt;/a>、&lt;a class="link" href="https://linux.do/t/topic/162835" target="_blank" rel="noopener"
+>memos css美化分享&lt;/a>、&lt;a class="link" href="https://blog.memos.ee/archives/190.html" target="_blank" rel="noopener"
+>memos自定义CSS：标签样式、字体大小、选项卡隐藏&lt;/a>&lt;/p>
+&lt;p>Memos——设置——系统——自定义样式里添加以下代码保存：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;span class="lnt">68
+&lt;/span>&lt;span class="lnt">69
+&lt;/span>&lt;span class="lnt">70
+&lt;/span>&lt;span class="lnt">71
+&lt;/span>&lt;span class="lnt">72
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">/* 字体美化 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">@import &amp;#39;//cdn.imsun.org/lxgw-wenkai-screen-webfont/lxgwwenkaigbscreen.css&amp;#39;;body {font-family:&amp;#34;LXGW WenKai Screen&amp;#34;,sans-serif;}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 设置 Memos 标签样式 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">span.inline-block.w-auto.text-blue-600.dark\:text-blue-400{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> color: #f3f3f3;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #40b76b;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> border-radius: 2px;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> padding: 2px 6px;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> font-size: 15px;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> margin-bottom: 4px;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 设置同级下不同的标签显示不同的颜色 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 第2个标签 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">span.inline-block.w-auto.text-blue-600.dark\:text-blue-400:nth-child(n+2) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #157cf5;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 第3个标签 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">span.inline-block.w-auto.text-blue-600.dark\:text-blue-400:nth-child(n+4) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #f298a6;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 第4个标签 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">span.inline-block.w-auto.text-blue-600.dark\:text-blue-400:nth-child(n+6) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #fdb15d;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 第5个标签 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">span.inline-block.w-auto.text-blue-600.dark\:text-blue-400:nth-child(n+8) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #67d6ca;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 第6个标签 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">span.inline-block.w-auto.text-blue-600.dark\:text-blue-400:nth-child(n+10) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #7445e0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 设置 Memos 文本高亮样式 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mark {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background-color: #F27579;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> color: #f3f3f3;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> padding-left:2px;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> border-radius: 2px;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 修改Memo字号 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.memo-wrapper .text-base {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> font-size: 0.95rem;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 修改代码块字号 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.text-sm {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> font-size: 0.85rem;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 隐藏 通知 选项卡 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#header-inbox {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display: none;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 隐藏 个人资料 选项卡 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#header-profile {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display: none;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 隐藏 探索 选项卡 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#header-explore {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> display: none;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/* 修改编辑器字体为等宽 */
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">textarea {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> font-family: &amp;#39;Courier New&amp;#39;, Courier, monospace;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="后记">后记
+&lt;/h2>&lt;p>2024.11.21 Memos已删除。&lt;/p></description></item></channel></rss>
