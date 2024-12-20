@@ -77,7 +77,7 @@ enabled = true
 ## Comments
 [comments]
 enabled = true
-provider = "waline"
+provider = "twikoo"
 
 [comments.disqusjs]
 shortname = ""
@@ -118,7 +118,7 @@ placeholder = ""
 admin = "Admin"
 
 [comments.twikoo]
-envId = "https://twikoul.netlify.app/.netlify/functions/twikoo"
+envId = "https://twikoul.darkbluesoul.cc"
 region = ""
 path = ""
 lang = ""
