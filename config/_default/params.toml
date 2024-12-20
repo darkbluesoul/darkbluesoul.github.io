@@ -106,7 +106,7 @@ autoCreateIssue = false
 
 [comments.waline]
 serverURL = "https://waline.darkbluesoul.cc/"
-lang = "zh-CN"
+lang = ""
 visitor = ""
 avatar = ""
 reaction = true
