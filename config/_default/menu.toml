@@ -22,3 +22,11 @@ url = "https://bsky.app/profile/darkbluesoul.cc"
 
 [social.params]
 icon = "brand-bluesky"
+
+[[social]]
+identifier = "mastodon"
+name = "Mastodon"
+url = "https://mastodon.social/@darkbluesoul"
+
+[social.params]
+icon = "brand-mastodon"
