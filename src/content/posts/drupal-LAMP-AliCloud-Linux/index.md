@@ -1,24 +1,15 @@
 ---
 title: Alibaba Cloud Linux安装Drupal10.0.7
-description: 'Alibaba Cloud Linux 3.2104 LTS 64位部署LAMP环境，安装Drupal10.0.7及一些问题的解决办法。'
+# description: 'Alibaba Cloud Linux 3.2104 LTS 64位部署LAMP环境，安装Drupal10.0.7及一些问题的解决办法。'
 published: 2023-04-20
-image: "./drupal.png"
+
 tags: [Drupal, PHP,  MySQL, Apache]
 category: Code
 ---
-<!-- +++
-author = "Darkblue Soul"
-title = "Alibaba Cloud Linux安装Drupal10.0.7"
-date = "2023-04-20 09:57:10 +0800"
-description = "Alibaba Cloud Linux 3.2104 LTS 64位部署LAMP环境，安装Drupal10.0.7及一些问题的解决办法。"
-categories = [
-    "Code"
-]
-tags = [
-    "Drupal", "PHP",  "MySQL", "Apache"
-]
-image = "drupal.png"
-+++ -->
+
+
+![Drupal](drupal.png)
+
 想学下Drupal，按[部署LAMP环境（Alibaba Cloud Linux 3）](https://help.aliyun.com/document_detail/460773.html?spm=a2c4g.440490.0.0.1d2e38d3r4E6ag)部署环境，但是PHP7.4没法安装Drupal10，所以修改了一下。其实还是挺折腾的，弄了一周多的样子，各种踩坑，装好以后也是各种报错。好在这次安装基本都做了笔记，稍微整理下，供参考。
 
 ## **Apache2.4**

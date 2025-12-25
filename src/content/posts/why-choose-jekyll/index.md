@@ -1,25 +1,11 @@
 ---
 title: jekyll之折腾
-description: '从jekyll到gridea，再hugo，再回到jekyll.'
+# description: '从jekyll到gridea，再hugo，再回到jekyll.'
 published: 2021-12-17
-image: "./retrosupply-jLwVAUtLOAQ-unsplash.jpg"
 tags: [jekyll, gridea, hugo, MXlinux, Linux Mint]
 category: Code
 ---
-<!-- +++
-author = "Darkblue Soul"
-title = "jekyll之折腾"
-date = "2021-12-17 13:32:20 -0600"
-description = "从jekyll到gridea，再hugo，再回到jekyll."
-categories = [
-    "Code"
-]
-tags = [
-    "jekyll", "gridea", "hugo", "MXlinux", "Linux Mint"
-]
 
-image = "retrosupply-jLwVAUtLOAQ-unsplash.jpg"
-+++ -->
 ## jekyll对新手略难
 Linux Mint安装[jekyll](http://jekyllcn.com/)，有点忘了，装ruby就折腾了好久，各种出错，应该就是Linux命令不熟的原因，最后算是弄好了，git push都正常，就是觉得主题不好看，下个主题么，又是缺东少西的，就懒得弄了。后面无聊搜了下Linux发行版的排名，下了个排第一的MXLinux，重装系统，jekyll啥的就都没了。
 <!--more-->
@@ -50,6 +36,3 @@ jekyll主题是下的zip，解压以后修改config，再
 总之，先这样吧，域名也绑了，这两天在纠结要不要阿里云买个便宜点的域名做个备案，只是便宜的后缀都好长，三位的两个我前面都买了又不想用在博客上。算了，贵点就贵点吧，看今年能不能坚持写下去吧。
 
 2022.05.03 换**hugo**了。
-
->Cover Photo by <a href="https://unsplash.com/@retrosupply?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">RetroSupply</a> on <a href="https://unsplash.com/photos/vintage-teal-typewriter-beside-book-jLwVAUtLOAQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-      

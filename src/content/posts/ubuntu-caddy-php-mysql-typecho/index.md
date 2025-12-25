@@ -1,25 +1,11 @@
 ---
 title: Ubuntu 20.04+Caddy+PHP+MySQL搭建Typecho
-description: 'Racknerd VPS Ubuntu 20.04用Caddy、MySQL、PHP搭建Typecho.'
+# description: 'Racknerd VPS Ubuntu 20.04用Caddy、MySQL、PHP搭建Typecho.'
 published: 2024-12-24
-image: "./blog-2355684_1280.jpg"
+
 tags: [Caddy, PHP, MySQL]
 category: Code
 ---
-<!-- +++
-author = "Darkblue Soul"
-title = "Ubuntu 20.04+Caddy+PHP+MySQL搭建Typecho"
-date = "2024-12-24 10:18:00 +0800"
-description = "Rcaknerd VPS Ubuntu 20.04用Caddy、MySQL、PHP搭建Typecho."
-categories = [
-    "Code"
-]
-tags = [
-    "Caddy", "PHP", "MySQL"
-]
-
-image = "blog-2355684_1280.jpg"
-+++ -->
 
 
 
@@ -45,4 +31,3 @@ systemctl reload caddy
 ---
 2024.12.27 已经删了，用回hugo了，部署在vercel。
 
->封面图片由<a href="https://pixabay.com/zh/users/wokandapix-614097/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2355684">WOKANDAPIX</a>在<a href="https://pixabay.com/zh//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2355684">Pixabay</a>上发布

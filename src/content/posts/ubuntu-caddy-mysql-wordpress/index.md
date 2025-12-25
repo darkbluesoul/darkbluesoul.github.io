@@ -1,9 +1,9 @@
 ---
 title: Caddy安装WordPress
-description: 'Racknerd VPS Ubuntu20.04配置Caddy、MySQL、PHP安装WordPress.'
+# description: 'Racknerd VPS Ubuntu20.04配置Caddy、MySQL、PHP安装WordPress.'
 published: 2025-01-30
 slug: caddy-wordpress
-image: "./wordpress-581849_1280.jpg"
+
 category: Code
 tags: [Ubuntu, Caddy, PHP, MySQL, WordPress]
 ---
@@ -130,4 +130,3 @@ define( 'NONCE_SALT',       'put your unique phrase here' );
 现在就可以在浏览器输入绑定网址打开WordPress欢迎页面填写站点信息了。
 
 
->封面图片由<a href="https://pixabay.com/zh/users/doki7-646987/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=581849">Dok Sev</a>在<a href="https://pixabay.com/zh//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=581849">Pixabay</a>上发布

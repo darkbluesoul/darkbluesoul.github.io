@@ -1,10 +1,10 @@
 ---
 title: 杂记20240803
 published: 2024-08-03
-description: '那天应该挺无聊，放假就都挺无聊的.'
+# description: '那天应该挺无聊，放假就都挺无聊的.'
 category: Mood
 tags: [dairy, emotion]
-image: "./daniil-silantev-iGCDwT8BKEk-unsplash.jpg"
+
 
 ---
 
@@ -19,5 +19,3 @@ image: "./daniil-silantev-iGCDwT8BKEk-unsplash.jpg"
 
 手游最近荒了，塔瑞斯世界玩着像上班，弃了。现在算是想明白了，其实我不适合呼朋唤友玩网游，更适合我的是单机游戏，然而我又希望在服务器上留下点什么，嗯，Steam的游戏存档应该也算吧。
 
->Cover Photo by <a href="https://unsplash.com/@betagamma?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Daniil Silantev</a> on <a href="https://unsplash.com/photos/a-forest-filled-with-lots-of-tall-trees-iGCDwT8BKEk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-      

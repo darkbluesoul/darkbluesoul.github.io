@@ -1,25 +1,12 @@
 ---
 title: 小程序积分排行
-description: '小程序云开发积分管理，奖励自动排名定等级.'
+# description: '小程序云开发积分管理，奖励自动排名定等级.'
 published: 2022-03-02
-image: "./code-3337044_1280.jpg"
+
 tags: [wechat, node.js, JavaScript]
 category: Code
 ---
-<!-- +++
-author = "Darkblue Soul"
-title = "小程序积分排行"
-date = "2022-03-02 16:09:30 +0800"
-description = "小程序云开发积分管理，奖励自动排名定等级."
-categories = [
-    "Code"
-]
-tags = [
-    "wechat", "node.js", "JavaScript"
-]
 
-image = "code-3337044_1280.jpg"
-+++ -->
 
 
 企业微信里写了个小程序，对学生的积分进行管理，前段时间无聊想着弄个排名吧，因为平时也有扣分，那些平时表现好的犯错跟其他成员扣分一样扣，总觉得亏了点，于是就抄王者荣耀搞了奖分等级，等级高点的扣分的时候就打个折。懒得改小程序，就每个月导出数据库统计一次，扣分打折根据统计出来的排名折扣口算输入。新学期，想着长痛不如短痛，还是直接做在小程序里好了。
@@ -238,4 +225,3 @@ rank20.get()
 
 挺好的，实现了自己想要的功能，很有成就感。
 
->封面图片由<a href="https://pixabay.com/zh/users/tsmr-5239693/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=3337044">Tobias</a>在<a href="https://pixabay.com/zh//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=3337044">Pixabay</a>上发布

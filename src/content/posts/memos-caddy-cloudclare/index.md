@@ -1,25 +1,13 @@
 ---
 title: Memos+Caddy+Cloudflare自建微博
-description: '在Racknerd VPS上docker搭建Memos，Caddy反向代理，Cloudflare R2图床'
+# description: '在Racknerd VPS上docker搭建Memos，Caddy反向代理，Cloudflare R2图床'
 published: 2024-11-19
-image: "./memos.png"
+
 tags: [memos, Caddy, Cloudflare]
 category: Code
 ---
-<!-- +++
-author = "Darkblue Soul"
-title = "Memos+Caddy+Cloudflare自建微博"
-date = "2024-11-19 15:08:59 +0800"
-description = "在Racknerd VPS上docker搭建Memos，Caddy反向代理，Cloudflare R2图床"
-categories = [
-    "Code"
-]
-tags = [
-    "memos", "caddy", "cloudflare"
-]
-image = "memos.png"
 
-+++ -->
+![memos](memos.png)
 
 微博每次发了过几天就忍不住又改成自己可见，不知道是在担心什么。前段时间看到有介绍Memos自建微博的，略心动。这两天网上逛逛看到了Racknerd双11特惠VPS好便宜，没忍住。。。干脆$21.72买了两年。刚才想去找下链接，好像已经下架了。
 

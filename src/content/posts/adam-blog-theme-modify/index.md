@@ -1,20 +1,12 @@
 ---
 title: Adam Blog 2.0主题修改
-description: '删除mailchimp，修改Disqus为来必力，修改中文字数统计，修改摘要显示.'
+# description: '删除mailchimp，修改Disqus为来必力，修改中文字数统计，修改摘要显示.'
 published: 2021-12-29
-image: "./mailbox-341744_1280.jpg"
+
 tags: [mailchimp, disqus, livere, Jekyll]
 category: Code
 ---
-<!-- ---
-title: Adam Blog 2.0主题修改
-published: 2021-12-29
-description: "删除mailchimp，修改Disqus为来必力，修改中文字数统计，修改摘要显示."
-image: ""
-tags: ["mailchimp", "disqus", "livere", "Jekyll"]
-category: Code
-draft: false
---- -->
+
 
 ## 删除mailchimp
 
@@ -132,5 +124,3 @@ excerpt_separator: '<!--more-->'
 唉，思维惯势不可取，还一点是要细心，其实目录结构里看一下就知道了，就是每次翻倒都是扫一眼就过，该。
 
 PS:发布的时候一直出错，显示'if' tag was never closed，按[GitHub 博客-- Jekyll--代码高亮，Liquid 转义字符](https://blog.csdn.net/zhangpeterx/article/details/103920538)的方法加了raw终于解决了，还一个就是tag里我写了个size。。。两个问题我花了好几个小时才解决。
-
->封面图片由<a href="https://pixabay.com/zh/users/stefanhoffmann-152440/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=341744">Stefan Hoffmann</a>在<a href="https://pixabay.com/zh//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=341744">Pixabay</a>上发布

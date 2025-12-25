@@ -1,25 +1,12 @@
 ---
 title: inkscape修改logo
-description: '第一次用inkscape，做了个很简单的logo.'
+# description: '第一次用inkscape，做了个很简单的logo.'
 published: 2021-12-27
-image: "./water-1283963_1280.jpg"
+
 tags: [inkscape, Jekyll]
 category: Code
 ---
-<!-- +++
-author = "Darkblue Soul"
-title = "inkscape修改logo"
-date = "2021-12-27 19:32:10 +0800"
-description = "第一次用inkscape，做了个很简单的logo."
-categories = [
-    "Code"
-]
-tags = [
-    "inkscape", "Jekyll"
-]
-image = "water-1283963_1280.jpg"
 
-+++ -->
 
 建好博客第一件事情就是改logo，毕竟不好顶着别人的名字啊，一开始想着简单弄个好了。
 
@@ -50,4 +37,3 @@ AI应该是叫建立轮廓，终于可以了，字体都在了，本地看看也
 
 所以现在我又回到最早的版本了，现在是路径了，不会再丢字体了。也好的，兜来兜去，知道的又多了点，不是么？
 
->封面图片由<a href="https://pixabay.com/zh/users/pexels-2286921/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1283963">Pexels</a>在<a href="https://pixabay.com/zh//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1283963">Pixabay</a>上发布

@@ -1,25 +1,12 @@
 ---
 title: 最近的一些想法
-description: '迷茫，要不要继续学习？'
+# description: '迷茫，要不要继续学习？'
 published: 2023-03-29
-image: "./cyber-brain-7633488_1920.jpg"
+
 tags: [UE, AI]
 category: Mood
 ---
-<!-- +++
-author = "Darkblue Soul"
-title = "最近的一些想法"
-date = "2023-03-29 10:46:00 +0800"
-description = "迷茫，要不要继续学习？"
-categories = [
-    "Diary"
-]
-tags = [
-    "UE", "AI"
-]
-image = "cyber-brain-7633488_1920.jpg"
 
-+++ -->
 
 前面那段时间在犹豫是学BIM还是UE，虽然BIM更接近专业，但不知道为什么就是没什么兴趣。
 
@@ -42,5 +29,3 @@ AI发展太快了，ChatGPT本来想试试的，弄了几次都无权使用就�
 到晚上的时候大概想明白了，我学这些本来就没指望产出啊？只是我想学而已，这是我喜欢做想做的事情，那么管他结果如何啊，就是这样！
 
 
-
->封面图片由[Kohji Asakawa](https://pixabay.com/zh/users/deltaworks-37465/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=7633488)在[Pixabay](https://pixabay.com/zh//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=7633488)上发布

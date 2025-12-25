@@ -1,26 +1,13 @@
 ---
 title: Python Crash Course学习笔记
-description: 'Python Crash Course学习时碰到的一些问题及解决办法'
+# description: 'Python Crash Course学习时碰到的一些问题及解决办法'
 published: 2022-04-18
-image: "./python-course.jpg"
+
 tags: [Python, Django]
 category: Code
 ---
 
-<!-- +++
-author = "Darkblue Soul"
-title = "Python Crash Course学习笔记"
-date = "2022-04-18 08:52:10 +0800"
-description = "Python Crash Course学习时碰到的一些问题及解决办法"
-categories = [
-    "Code"
-]
-tags = [
-    "Python", "Django"
-]
-image = "python-course.jpg"
 
-+++ -->
 最近在学《Python Crash Course》第一版，可能是版本的原因，抄作业经常会出错，网上找了下解决办法。
 ## Error--requests.exceptions.ProxyError【17.1.4　处理API响应】
 调用API一直报错，请求异常，代理错误。

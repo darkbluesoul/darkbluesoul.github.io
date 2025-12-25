@@ -1,25 +1,12 @@
 ---
 title: 笨方法学Python小记
-description: '按教程手输代码练习，就是版本老了点。'
+# description: '按教程手输代码练习，就是版本老了点。'
 published: 2023-01-15
 image: "./stupid-learn.png"
 tags: [Python]
 category: Mood
 ---
-<!-- +++
-author = "Darkblue Soul"
-title = "笨方法学Python小记"
-date = "2023-01-15 15:19:01 +0800"
-description = "按教程手输代码练习，就是版本老了点。"
-categories = [
-    "Diary"
-]
-tags = [
-    "Python"
-]
-image = "stupid-learn.png"
 
-+++ -->
 
 前几天把域名绑到hashnode去了，本来想着写写方便点，后来又觉得没啥意思，就又改回来了。
 
