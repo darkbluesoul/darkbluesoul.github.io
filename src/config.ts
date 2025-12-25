@@ -166,9 +166,13 @@ export const themeConfig: ThemeConfig = {
         url: '/atom.xml', // or /rss.xml
       },
       {
-        name: 'GitHub',
-        url: 'https://github.com/darkblueosul',
+        name: 'Weibo',
+        url: 'https://weibo.com/darkbluesoul',
       },
+      // {
+      //   name: 'GitHub',
+      //   url: 'https://github.com/darkblueosul',
+      // },
       // {
       //   name: 'Email',
       //   url: '',
