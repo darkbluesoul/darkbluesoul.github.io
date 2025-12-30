@@ -167,7 +167,11 @@ export const themeConfig: ThemeConfig = {
       },
       {
         name: 'Weibo',
-        url: 'https://weibo.com/darkbluesoul',
+        url: 'https://weibo.com/darkbluesoul', 
+      },  
+      {
+        name: 'Bilibili',
+        url: 'https://space.bilibili.com/44775802', 
       },
       // {
       //   name: 'GitHub',
