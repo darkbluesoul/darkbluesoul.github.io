@@ -19,4 +19,4 @@ tags: [SteamDeck, Game, WoW, Mood]
 ## Kodi
 卖家装了很多应用，各种模拟器，影音分类装了Kodi和VLC，据说Kodi很强大，想着弄点电视看看，按[Kodi看电视直播教程 安装PVR IPTV Simple Client](http://www.kodiplayer.cn/course/2871.html)装插件，就是装不上，什么格式不符啊啥的，结果翻到本地插件那里，原来都已经装好了，只是没启用而已。下了m3u8打开，也没几个台可以看，能看的又卡，以后换个直播源再试试。
 
-PS：嗯，SteamDeck还挺好玩的，桌面模式比Deck UI更好玩，慢慢折腾呗，最后整成自己喜欢的样子！下次如果再买的话，屏幕买好点。
+**PS**：嗯，SteamDeck还挺好玩的，桌面模式比Deck UI更好玩，慢慢折腾呗，最后整成自己喜欢的样子！下次如果再买的话，屏幕买好点。
