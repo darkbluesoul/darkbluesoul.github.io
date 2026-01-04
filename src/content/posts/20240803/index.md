@@ -3,7 +3,7 @@ title: 杂记20240803
 published: 2024-08-03
 # description: '那天应该挺无聊，放假就都挺无聊的.'
 category: Mood
-tags: [dairy, emotion]
+tags: [diary, emotion, Mood]
 
 
 ---

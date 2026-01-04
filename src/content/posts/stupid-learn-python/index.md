@@ -3,7 +3,7 @@ title: 笨方法学Python小记
 # description: '按教程手输代码练习，就是版本老了点。'
 published: 2023-01-15
 image: "./stupid-learn.png"
-tags: [Python]
+tags: [Python, Mood]
 category: Mood
 ---
 

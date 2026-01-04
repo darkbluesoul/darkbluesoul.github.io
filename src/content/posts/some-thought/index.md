@@ -3,7 +3,7 @@ title: 最近的一些想法
 # description: '迷茫，要不要继续学习？'
 published: 2023-03-29
 
-tags: [UE, AI]
+tags: [UE, AI, Mood]
 category: Mood
 ---
 
