@@ -7,7 +7,7 @@ tags: [Python, Mood]
 category: Mood
 ---
 
-
+![笨办法学Python](stupid-learn.png)
 前几天把域名绑到hashnode去了，本来想着写写方便点，后来又觉得没啥意思，就又改回来了。
 
 回老家这几天，天天玩游戏，手机电脑一起玩，一个TRAHA，一个UNDECEMBER，逆水寒开了老兵服我又去贡献了几张月卡，嗯，一个角色要一张点卡，然后我又喜欢建新号。。。

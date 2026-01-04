@@ -7,7 +7,7 @@ tags: [memos, Caddy, Cloudflare]
 category: Code
 ---
 
-![memos](memos.png)
+![Memos](memos.png)
 
 微博每次发了过几天就忍不住又改成自己可见，不知道是在担心什么。前段时间看到有介绍Memos自建微博的，略心动。这两天网上逛逛看到了Racknerd双11特惠VPS好便宜，没忍住。。。干脆$21.72买了两年。刚才想去找下链接，好像已经下架了。
 
