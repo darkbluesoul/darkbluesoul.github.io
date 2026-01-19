@@ -82,15 +82,15 @@ export const themeConfig: ThemeConfig = {
     // giscus
     // https://giscus.app/
     giscus: {
-      repo: '',
-      repoId: '',
-      category: '',
-      categoryId: '',
+      repo: 'darkbluesoul/BlogComment',
+      repoId: 'R_kgDOQ8gEyg',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDOQ8gEys4C1IQA',
       mapping: 'pathname',
       strict: '0',
       reactionsEnabled: '1',
       emitMetadata: '0',
-      inputPosition: 'bottom',
+      inputPosition: 'top',
     },
     // twikoo
     // https://twikoo.js.org/
