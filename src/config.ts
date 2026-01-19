@@ -173,10 +173,10 @@ export const themeConfig: ThemeConfig = {
         name: 'Bilibili',
         url: 'https://space.bilibili.com/44775802', 
       },
-      // {
-      //   name: 'GitHub',
-      //   url: 'https://github.com/darkblueosul',
-      // },
+      {
+        name: 'GitHub',
+        url: 'https://github.com/darkblueosul',
+      },
       // {
       //   name: 'Email',
       //   url: '',
