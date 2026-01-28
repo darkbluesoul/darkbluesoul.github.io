@@ -175,7 +175,7 @@ export const themeConfig: ThemeConfig = {
       },
       {
         name: 'GitHub',
-        url: 'https://github.com/darkblueosul',
+        url: 'https://github.com/darkbluesoul',
       },
       // {
       //   name: 'Email',
