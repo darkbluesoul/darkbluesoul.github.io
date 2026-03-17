@@ -2,7 +2,7 @@
 title: 电脑升级
 published: 2026-03-17
 category: Mood
-tags: [hardware, game, Mood]
+tags: [Hardware, Game, Mood]
 
 
 ---
