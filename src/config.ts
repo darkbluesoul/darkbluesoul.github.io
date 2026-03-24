@@ -166,8 +166,8 @@ export const themeConfig: ThemeConfig = {
         url: '/atom.xml', // or /rss.xml
       },
       {
-        name: 'Weibo',
-        url: 'https://weibo.com/darkbluesoul', 
+        name: 'Douban',
+        url: 'https://www.douban.com/people/darkbluesoul/', 
       },  
       {
         name: 'Bilibili',
