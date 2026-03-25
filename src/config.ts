@@ -183,7 +183,7 @@ export const themeConfig: ThemeConfig = {
       // },
       // {
       //   name: 'X',
-      //   url: 'https://x.com/radishzz_',
+      //   url: 'https://x.com/',
       // },
     ],
     // year of website start
