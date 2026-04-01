@@ -7,7 +7,7 @@ tags: [WoW, T3, Game, Mood]
 
 ---
 
-![永夜 转载自NGA论坛作者：林无双](https://files.seeusercontent.com/2026/04/01/yFf8/54b57c5.jpg)
+![《永夜》 转载自NGA论坛 作者：林无双](https://files.seeusercontent.com/2026/04/01/yFf8/54b57c5.jpg)
 
 对T3的执念最早是来自林无双的这幅《永夜》，当时第一次看到这张图片的时候激动得不行，加上自己又是亡灵战，就很想要搞一套T3。
 
