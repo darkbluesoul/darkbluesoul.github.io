@@ -165,14 +165,18 @@ export const themeConfig: ThemeConfig = {
         name: 'RSS',
         url: '/atom.xml', // or /rss.xml
       },
+      // {
+      //   name: 'Weibo',
+      //   url: 'https://weibo.com/', 
+      // },  
       {
-        name: 'Weibo',
-        url: 'https://weibo.com/darkbluesoul', 
+        name: 'Mastodon',
+        url: 'https://mastodon.social/@darkbluesoul', 
       },  
-      {
-        name: 'Bilibili',
-        url: 'https://space.bilibili.com/44775802', 
-      },
+      // {
+      //   name: 'Bilibili',
+      //   url: 'https://space.bilibili.com/', 
+      // },
       {
         name: 'GitHub',
         url: 'https://github.com/darkbluesoul',
