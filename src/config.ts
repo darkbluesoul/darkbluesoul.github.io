@@ -171,7 +171,6 @@ export const themeConfig: ThemeConfig = {
       // },  
       {
         name: 'Mastodon',
-        rel: "me",
         url: 'https://mastodon.social/@darkbluesoul', 
       },  
       // {
