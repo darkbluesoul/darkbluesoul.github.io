@@ -170,13 +170,13 @@ export const themeConfig: ThemeConfig = {
       //   url: 'https://weibo.com/', 
       // },  
       {
-        name: 'Mastodon',
-        url: 'https://mastodon.social/@darkbluesoul', 
+        name: 'Xiaohongshu',
+        url: 'https://xhslink.com/m/7rkjAo6tU8R', 
       },  
-      // {
-      //   name: 'Bilibili',
-      //   url: 'https://space.bilibili.com/', 
-      // },
+      {
+        name: 'Bilibili',
+        url: 'https://space.bilibili.com/44775802', 
+      },
       {
         name: 'GitHub',
         url: 'https://github.com/darkbluesoul',
