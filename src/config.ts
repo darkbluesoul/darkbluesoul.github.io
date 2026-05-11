@@ -4,7 +4,7 @@ export const themeConfig: ThemeConfig = {
   // SITE INFORMATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> START
   site: {
     // site title
-    title: '深蓝灵魂',
+    title: 'Darkblue Soul',
     // site subtitle
     subtitle: 'A messy programming learner.',
     // site description
@@ -12,7 +12,7 @@ export const themeConfig: ThemeConfig = {
     // use i18n title/subtitle/description from src/i18n/ui.ts instead of static ones above
     i18nTitle: false, // true | false
     // author name
-    author: '深蓝灵魂',
+    author: 'darkbluesoul',
     // site url
     url: 'https://darkbluesoul.cc',
     // base path
