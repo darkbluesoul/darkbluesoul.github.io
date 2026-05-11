@@ -169,6 +169,10 @@ export const themeConfig: ThemeConfig = {
         name: 'Mastodon',
         url: 'https://mastodon.social/@darkbluesoul', 
       },  
+      // {
+      //   name: 'Xiaohongshu',
+      //   url: 'https://xhslink.com/m/', 
+      // },  
       {
         name: 'Bilibili',
         url: 'https://space.bilibili.com/44775802', 
