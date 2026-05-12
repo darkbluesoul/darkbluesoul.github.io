@@ -168,11 +168,15 @@ export const themeConfig: ThemeConfig = {
       // {
       //   name: 'Mastodon',
       //   url: 'https://mastodon.social/', 
-      // },  
+      // }, 
       {
-        name: 'Xiaohongshu',
-        url: ' https://xhslink.com/m/8OLYOXW8WyU', 
+        name: 'Weibo',
+        url: 'https://weibo.com/darkbluesoul', 
       },  
+      // {
+      //   name: 'Xiaohongshu',
+      //   url: ' https://xhslink.com/m/', 
+      // },  
       {
         name: 'Bilibili',
         url: 'https://space.bilibili.com/44775802', 
