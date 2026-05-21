@@ -83,9 +83,9 @@ export const themeConfig: ThemeConfig = {
     // https://giscus.app/
     giscus: {
       repo: 'darkbluesoul/BlogComment',
-      repoId: 'R_kgDOQ8gEyg',
+      repoId: 'R_kgDOSjokBg',
       category: 'Announcements',
-      categoryId: 'DIC_kwDOQ8gEys4C1IQA',
+      categoryId: 'DIC_kwDOSjokBs4C9g-f',
       mapping: 'pathname',
       strict: '0',
       reactionsEnabled: '1',
