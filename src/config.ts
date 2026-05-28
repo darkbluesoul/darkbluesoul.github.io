@@ -14,7 +14,7 @@ export const themeConfig: ThemeConfig = {
     // author name
     author: '深蓝灵魂',
     // site url
-    url: 'https://darkbluesoul.cc',
+    url: 'https://darkbluesoul.github.io',
     // base path
     // root directory for all pages and assets
     base: '/', // e.g., '/blog', '/docs'
