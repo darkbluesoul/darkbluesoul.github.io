@@ -1,13 +1,15 @@
 ---
 title: 魔兽世界正式服T3的努力
+published: 2026-04-01
 category: Mood
-tags: [WoW, T3, Game]
-description: 正式服搞了套T3胚子，折腾并快乐。
-date: 2026-04-01 09:18:00 +0800
-image: 004.jpg
+tags: [WoW, T3, Game, Mood]
+
+
 ---
 
-对T3的执念最早是来自林无双的这幅[《永夜》](https://wow.17173.com/news/2007-02-08/20070208143747969,5.shtml)，当时第一次看到这张图片的时候激动得不行，加上自己又是亡灵战，就很想要搞一套T3。
+![《永夜》 转载自NGA论坛 作者：林无双](https://files.seeusercontent.com/2026/04/01/yFf8/54b57c5.jpg)
+
+对T3的执念最早是来自林无双的这幅《永夜》，当时第一次看到这张图片的时候激动得不行，加上自己又是亡灵战，就很想要搞一套T3。
 
 那时应该是燃烧的远征吧，NAXX（纳克萨玛斯）是关了？我想不起来了。那时公会里还挺多人玩的，KLZ（卡拉赞）当时每周都打，再后面好像就人少了，巫妖王那时是九城换网易么？死骑我第一次玩应该是在台服玩的，然后回国服就没什么人了。最后熊猫人的时候公会就剩我一个人把所有专业都练到了满级，然后AFK了。
 
@@ -19,11 +21,11 @@ image: 004.jpg
 
 [【10.15解密合集】手把手教你如何进入旧版通灵学院--进入旧版NAXX解密线第一步（做T3的）](https://www.bilibili.com/video/BV19W4y1o7ZX):
 
-{{< bilibili BV19W4y1o7ZX >}}
+::bilibili{id="BV19W4y1o7ZX"}
 
 NPC我找不到又看了[解锁旧纳克萨玛斯T3兑换NPC—扎凯特·碎颅者](https://www.bilibili.com/video/BV1vXYjeEEZS/)：
 
-{{< bilibili BV1vXYjeEEZS >}}
+::bilibili{id="BV1vXYjeEEZS"}
 
 接下来就是对我来说最难的一步了，社恐啊，找人帮忙很可怕的！最后还是在T3的执念下，鼓起勇气在NGA的公益制造专区找到了[全区全服免费代工T3，以及关于制作T3的所有细节(方便转给找我帮忙的朋友们)](https://bbs.nga.cn/read.php?tid=41353192)，这里再次感谢 雷大熊#5825，帮我把死灵合金的问题解决了！谢谢！
 

@@ -1,11 +1,8 @@
 ---
 title: 又开始打排球了
+published: 2026-03-20
 category: Mood
 tags: [Sport, Mood]
-description: 越来越胖了，要多运动啊！最近打了几次气排球。
-date: 2026-03-20 09:15:00 +0800
-image: volleyball.jpg
-
 
 
 ---
