@@ -1,9 +1,10 @@
 ---
 title: 电脑升级
-published: 2026-03-17
 category: Mood
-tags: [Hardware, Game, Mood]
-
+tags: [Hardware, Game]
+description: 老电脑升了个级，玩游戏稍微舒服点。
+date: 2026-03-17 09:48:00 +0800
+image: 640.png
 
 ---
 
