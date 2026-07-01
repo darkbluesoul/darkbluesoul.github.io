@@ -1,21 +1,3 @@
-<!-- +++
-author = "Darkblue Soul"
-title = "游戏玩不动了"
-date = "2026-03-18 09:42:20 +0800"
-description = "玩游戏也觉得没意思了，唉。"
-categories = [
-    "Mood"
-]
-tags = [
-    "Game", "Mod"
-]
-image = "WoWScrnShot_031826_103618.webp"
-
-+++ -->
-
-
-
-
 ---
 title: 游戏玩不动了
 published: 2026-03-18
