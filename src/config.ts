@@ -169,14 +169,14 @@ export const themeConfig: ThemeConfig = {
       //   name: 'Mastodon',
       //   url: 'https://mastodon.social/', 
       // }, 
-      {
-        name: 'Weibo',
-        url: 'https://weibo.com/darkbluesoul', 
-      },  
       // {
-      //   name: 'Xiaohongshu',
-      //   url: 'https://xhslink.com/m/', 
+      //   name: 'Weibo',
+      //   url: 'https://weibo.com/', 
       // },  
+      {
+        name: 'Xiaohongshu',
+        url: 'https://xhslink.cn/m/4D8yPpcXiWY', 
+      },  
       {
         name: 'Bilibili',
         url: 'https://space.bilibili.com/44775802', 
