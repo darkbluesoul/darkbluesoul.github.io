@@ -165,14 +165,14 @@ export const themeConfig: ThemeConfig = {
         name: 'RSS',
         url: '/atom.xml', // or /rss.xml
       },
-      {
-        name: 'Weibo',
-        url: 'https://m.weibo.cn/u/1752045267', 
-      },  
       // {
-      //   name: 'Xiaohongshu',
-      //   url: 'https://xhslink.cn/m/', 
+      //   name: 'Weibo',
+      //   url: 'https://', 
       // },  
+      {
+        name: 'Xiaohongshu',
+        url: 'https://xhslink.cn/m/4D8yPpcXiWY', 
+      },  
       {
         name: 'Bilibili',
         url: 'https://space.bilibili.com/44775802', 
