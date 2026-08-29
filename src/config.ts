@@ -167,7 +167,7 @@ export const themeConfig: ThemeConfig = {
       },
       {
         name: 'Weibo',
-        url: 'https://weibo.com/darkbluesoul', 
+        url: 'https://m.weibo.cn/u/1752045267', 
       },  
       // {
       //   name: 'Xiaohongshu',
