@@ -171,7 +171,7 @@ export const themeConfig: ThemeConfig = {
       },  
       // {
       //   name: 'Xiaohongshu',
-      //   url: 'https://xhslink.cn/m/', 
+      //   url: 'https://xhslink.cn/m/1', 
       // },  
       {
         name: 'Bilibili',
